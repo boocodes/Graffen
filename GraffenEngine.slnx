@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="GraffenEngine.vcxproj" Id="5c551208-82a4-42f5-9d60-8af4eb07c770" />
+</Solution>
