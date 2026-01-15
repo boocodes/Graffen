@@ -25,6 +25,7 @@ glm::mat4 pixelPlacementProjection = glm::ortho(
 ShaderModule imageShader;
 ShaderModule fontShader;
 ShaderModule pixelPlacementShader;
+ShaderModule divGuiShader;
 
 void initShaders()
 {
@@ -33,7 +34,7 @@ void initShaders()
 		imageShader.generate("src/shaders/image/image.vs", "src/shaders/image/image.fs");
 		fontShader.generate("src/shaders/font/font.vs", "src/shaders/font/font.fs");
 		pixelPlacementShader.generate("src/shaders/pixelPlacement/pixelPlacement.vs", "src/shaders/pixelPlacement/pixelPlacement.fs");
-
+		divGuiShader.generate("src/shaders/gui_tags_shaders/div/div.vs", "src/shaders/gui_tags_shaders/div/div.fs");
 	}
 	catch (const std::exception& e)
 	{

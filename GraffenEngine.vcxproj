@@ -105,12 +105,12 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\java2\source\repos\GraffenEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\java2\source\repos\GraffenEngine\src;C:\Users\java2\source\repos\GraffenEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;assimp.lib;freetype.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\java2\source\repos\GraffenEngine\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -132,10 +132,33 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="GraffenEngine.cpp" />
+    <ClCompile Include="src\global\global.cpp" />
+    <ClCompile Include="src\gui_tags\div\div_tag.cpp" />
+    <ClCompile Include="src\gui_tags\document\document_tag.cpp" />
+    <ClCompile Include="src\gui_tags\img\img_tag.cpp" />
+    <ClCompile Include="src\gui_tags\p\p_tag.cpp" />
+    <ClCompile Include="src\gui_tags\root\root_tag.cpp" />
+    <ClCompile Include="src\module\font\font_module.cpp" />
+    <ClCompile Include="src\module\shader\shader_module.cpp" />
+    <ClCompile Include="src\module\util\util_module.cpp" />
+    <ClCompile Include="src\module\xml\xml_module.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\ft2build.h" />
     <ClInclude Include="include\glad\glad.h" />
     <ClInclude Include="include\KHR\khrplatform.h" />
+    <ClInclude Include="include\tinyxml2.h" />
+    <ClInclude Include="src\global\global.h" />
+    <ClInclude Include="src\gui_tags\div\div_tag.h" />
+    <ClInclude Include="src\gui_tags\document\document_tag.h" />
+    <ClInclude Include="src\gui_tags\img\img_tag.h" />
+    <ClInclude Include="src\gui_tags\p\p_tag.h" />
+    <ClInclude Include="src\gui_tags\root\root_tag.h" />
+    <ClInclude Include="src\module\camera\camera.h" />
+    <ClInclude Include="src\module\font\font_module.h" />
+    <ClInclude Include="src\module\shader\shader_module.h" />
+    <ClInclude Include="src\module\util\util_module.h" />
+    <ClInclude Include="src\module\xml\xml_module.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

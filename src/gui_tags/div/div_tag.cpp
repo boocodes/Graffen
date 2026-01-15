@@ -43,7 +43,7 @@ void DivTag::draw()
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glDisable(GL_DEPTH_TEST);
-		pixelPlacementShader.use();
+		divGuiShader.use();
 		pixelPlacementShader.setMat4("projection", pixelPlacementProjection);
 		pixelPlacementShader.setVec3("color", glm::vec3(0, 1, 1));
 		pixelPlacementShader.setFloat("radius", this->borderRadius);

@@ -19,6 +19,7 @@ public:
 	glm::vec3 backgroundColor;
 	unsigned int VAO, VBO, texture;
 	std::string backgroundImage;
+	
 	DivTag(int xPos, int yPos, int zIndex, int width, int height);
 	~DivTag();
 	float coords[12];

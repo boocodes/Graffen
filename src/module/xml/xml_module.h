@@ -8,7 +8,6 @@
 #include <gui_tags/p/p_tag.h>
 #include <gui_tags/img/img_tag.h>
 #include <gui_tags/div/div_tag.h>
-#include <gui_tags/body/body_tag.h>
 
 
 class XmlModule
