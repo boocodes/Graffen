@@ -18,9 +18,9 @@ extern glm::mat4 pixelPlacementProjection;
 
 
 
-
+extern ShaderModule imgGuiShader;
 extern ShaderModule divGuiShader;
-extern ShaderModule imageShader;
+
 extern ShaderModule fontShader;
 extern ShaderModule pixelPlacementShader;
 
