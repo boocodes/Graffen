@@ -142,6 +142,7 @@
     <ClCompile Include="src\module\shader\shader_module.cpp" />
     <ClCompile Include="src\module\util\util_module.cpp" />
     <ClCompile Include="src\module\xml\xml_module.cpp" />
+    <ClCompile Include="stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\ft2build.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="src\module\shader\shader_module.h" />
     <ClInclude Include="src\module\util\util_module.h" />
     <ClInclude Include="src\module\xml\xml_module.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

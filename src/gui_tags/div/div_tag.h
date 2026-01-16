@@ -12,25 +12,27 @@
 class DivTag : public RootTag
 {
 public:
-	std::vector<RootTag*> children;
 	float opacity = 1.0f;
 	bool visibility = true;
-	float borderRadius;
+	glm::vec4 borderRadius;
 	glm::vec3 backgroundColor;
-	unsigned int VAO, VBO, texture;
+	unsigned int VAO, VBO, texture, EBO;
 	std::string backgroundImage;
+
+	int borderSize;
+	float borderOpacity;
+	glm::vec3 borderColor;
+
 	
 	DivTag(int xPos, int yPos, int zIndex, int width, int height);
 	~DivTag();
-	float coords[12];
+	float coords[20];
 	void draw();
-	int getPositionToChildren();
 	bool hoverCheck(int mouseX, int mouseY);
 	bool clickCheck(int mouseX, int mouseY);
-	void addChild(RootTag* tag);
-
-
-	void center();
+	
+	void setBorder(int size, glm::vec3 color);
+	void setBorderOpacity(float opacity);
 
 
 };
