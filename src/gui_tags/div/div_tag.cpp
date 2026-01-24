@@ -2,9 +2,6 @@
 
 
 
-void initStyle();
-
-
 
 DivTag::DivTag(int xPos, int yPos, int zIndex, int width, int height)
 {
@@ -16,7 +13,7 @@ DivTag::DivTag(int xPos, int yPos, int zIndex, int width, int height)
 	this->width = width;
 	this->visibility = true;
 	this->height = height;
-	this->backgroundColor = glm::vec3(0, 0, 0);
+	this->backgroundColor = glm::vec4(0, 0, 0, 1);
 
 	glGenVertexArrays(1, &this->VAO);
 	glGenBuffers(1, &this->VBO);
@@ -48,13 +45,15 @@ void DivTag::draw()
 		divGuiShader.setMat4("projection", pixelPlacementProjection);
 		divGuiShader.setVec2("size", glm::vec2(this->width, this->height));
 		divGuiShader.setVec2("position", glm::vec2(xPos, yPos));
-		divGuiShader.setVec3("color", this->backgroundColor);
-		divGuiShader.setVec4("borderRadius", this->borderRadius);
+		divGuiShader.setVec4("color", this->backgroundColor);
+		divGuiShader.setVec4("borderRadius", glm::vec4(10, 0, 10, 0));
 
 		divGuiShader.setInt("borderSize", this->borderSize);
-		divGuiShader.setVec3("borderColor", this->borderColor);
+		
 		divGuiShader.setFloat("borderOpacity", this->borderOpacity);
 		divGuiShader.setFloat("smoothing", 1.0f);
+		divGuiShader.setVec4("borderWidth", glm::vec4(10, 10, 10, 10));
+		divGuiShader.setVec4("borderColor", glm::vec4(1, 0, 1, 1));
 			
 		glBindVertexArray(this->VAO);
 		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
@@ -75,7 +74,7 @@ bool DivTag::hoverCheck(int mouseX, int mouseY)
 }
 
 
-void DivTag::setBorder(int size, glm::vec3 color)
+void DivTag::setBorder(int size, glm::vec4 color)
 {
 	this->borderSize = size;
 	this->borderColor = color;

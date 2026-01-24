@@ -1,59 +1,111 @@
-#version 330 core
+п»ї#version 330 core
 out vec4 FragColor;
 
-uniform vec3 color;
+uniform vec4 color;            
+uniform vec4 borderColor;     
+uniform vec4 borderWidth;
 uniform vec2 size;
 uniform vec4 borderRadius;
 uniform vec2 position;
-uniform float smoothing; // Можно передавать из программы
+uniform float smoothing;
 
 in vec2 fragPos;
 
-// SDF функция для прямоугольника с закругленными углами
 float roundedRectSDF(vec2 p, vec2 b, vec4 r) {
-    // Для каждого квадранта используем свой радиус
+    vec2 q = abs(p);
+    
     float radius = 0.0;
     
-    // Определяем квадрант (с учетом вашей системы координат)
-    if (p.x > 0.0 && p.y > 0.0) {      // Bottom-right
-        radius = r.z;
-    } else if (p.x > 0.0 && p.y <= 0.0) { // Top-right
+    if (p.x >= 0.0 && p.y >= 0.0) {        //  (top-right)
         radius = r.y;
-    } else if (p.x <= 0.0 && p.y > 0.0) { // Bottom-left
-        radius = r.w;
-    } else {                             // Top-left
+    } else if (p.x < 0.0 && p.y >= 0.0) {  //  (top-left)
         radius = r.x;
+    } else if (p.x < 0.0 && p.y < 0.0) {   //  (bottom-left)
+        radius = r.w;
+    } else {                                // (bottom-right)
+        radius = r.z;
     }
     
-    // Если радиус 0, это обычный прямоугольник
     if (radius == 0.0) {
-        vec2 d = abs(p) - b;
+        vec2 d = q - b;
         return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
     }
     
-    // Для закругленных углов
-    vec2 q = abs(p) - b + radius;
-    return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
+    vec2 cornerPos = b - vec2(radius);
+    
+    if (q.x > cornerPos.x && q.y > cornerPos.y) {
+        vec2 cornerDist = q - cornerPos;
+        float distToCorner = length(cornerDist) - radius;
+        return distToCorner;
+    }
+    
+    vec2 d = q - b;
+    return max(d.x, d.y);
 }
 
 void main() {
-    // Центр прямоугольника
-    vec2 center = position + size * 0.5;
-    vec2 p = fragPos - center;
-    vec2 b = size * 0.5;
+    vec2 localPos = fragPos - position;
+    vec2 halfSize = size * 0.5;
+    vec2 center = halfSize;
+    vec2 p = localPos - center;
     
-    // Вычисляем расстояние до фигуры
-    float distance = roundedRectSDF(p, b, borderRadius);
+    float outerDist = roundedRectSDF(p, halfSize, borderRadius);
     
-    // Плавный переход с использованием smoothing
-    float smoothingFactor = 1.0; // или uniform переменная
+    float borderTop = borderWidth.x;
+    float borderRight = borderWidth.y;
+    float borderBottom = borderWidth.z;
+    float borderLeft = borderWidth.w;
     
-    // Используем smoothstep для антиалиасинга
-    float alpha = 1.0 - smoothstep(0.0, smoothingFactor, distance);
+    bool hasAnyBorder = borderTop > 0.0 || borderRight > 0.0 || 
+                       borderBottom > 0.0 || borderLeft > 0.0;
+    
+    bool hasFill = color.a > 0.001;
+    
+    vec2 innerHalfSize = halfSize;
+    vec4 innerRadius = borderRadius;
+    
+    if (hasAnyBorder) {
+        float minHorizontalBorder = min(borderLeft, borderRight);
+        float minVerticalBorder = min(borderTop, borderBottom);
+        
+        innerHalfSize = halfSize - vec2(minHorizontalBorder, minVerticalBorder);
+        innerRadius = max(borderRadius - vec4(
+            borderTop, borderRight, borderBottom, borderLeft
+        ), vec4(0.0));
+    }
+    
+    float innerDist = roundedRectSDF(p, innerHalfSize, innerRadius);
+    
+    float alpha = 0.0;
+    vec4 finalColor = vec4(0.0);
+    
+    // РџСЂРѕРІРµСЂСЏРµРј РіСЂР°РЅРёС†Сѓ
+    if (hasAnyBorder && borderColor.a > 0.001) {
+        if (outerDist <= 0.0 && innerDist > 0.0) {
+            alpha = borderColor.a;
+            finalColor = borderColor;
+        }
+    }
+    
+    if (alpha == 0.0 && hasFill) {
+        if (innerDist <= 0.0) {
+            alpha = color.a;
+            finalColor = color;
+        }
+    }
+    
+    if (outerDist > 0.0) {
+        alpha *= 1.0 - smoothstep(0.0, smoothing, outerDist);
+    }
+    else if (innerDist > 0.0 && hasAnyBorder) {
+    }
+    else if (innerDist > 0.0) {
+        alpha *= 1.0 - smoothstep(0.0, smoothing, innerDist);
+    }
     
     if (alpha <= 0.0) {
         discard;
     }
     
-    FragColor = vec4(color, alpha);
+    FragColor = vec4(finalColor.rgb, alpha);
 }
