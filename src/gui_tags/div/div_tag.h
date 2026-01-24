@@ -15,13 +15,13 @@ public:
 	float opacity = 1.0f;
 	bool visibility = true;
 	glm::vec4 borderRadius;
-	glm::vec3 backgroundColor;
+	glm::vec4 backgroundColor;
 	unsigned int VAO, VBO, texture, EBO;
 	std::string backgroundImage;
 
 	int borderSize;
 	float borderOpacity;
-	glm::vec3 borderColor;
+	glm::vec4 borderColor;
 
 	
 	DivTag(int xPos, int yPos, int zIndex, int width, int height);
@@ -31,7 +31,7 @@ public:
 	bool hoverCheck(int mouseX, int mouseY);
 	bool clickCheck(int mouseX, int mouseY);
 	
-	void setBorder(int size, glm::vec3 color);
+	void setBorder(int size, glm::vec4 color);
 	void setBorderOpacity(float opacity);
 
 

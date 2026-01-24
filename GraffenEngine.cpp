@@ -35,7 +35,8 @@ int main()
 
     DivTag* dive = new DivTag(100, 100, 1, 222, 222);
     ImgTag* imge = new ImgTag(0, 0, 1, "assets/login3.jpg");
-    dive->borderRadius = glm::vec4(10, 10, 10, 10);
+    dive->backgroundColor = glm::vec4(0, 0, 0, 0);
+    dive->borderRadius = glm::vec4(0, 5, 15, 20);
     imge->resize(308, 308);
 
     while (!glfwWindowShouldClose(window))
