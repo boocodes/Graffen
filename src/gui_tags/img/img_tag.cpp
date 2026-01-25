@@ -166,12 +166,17 @@ void ImgTag::resize(int new_width, int new_height)
 }
 
 
-bool ImgTag::hoverCheck(int mouse_x, int mouse_y)
+bool ImgTag::hoverCheck(int mouseX, int mouseY)
 {
 	return 1;
 }
 
-bool ImgTag::clickCheck(int mouse_x, int mouse_y)
+bool ImgTag::clickCheck(int mouseX, int mouseY)
 {
-	return 1;
+	if (((mouseX >= this->xPos) && (mouseX <= this->xPos + this->width)) && ((mouseY >= this->yPos) && (mouseY <= this->yPos + this->height)))
+	{
+		std::cout << "from IMG!" << std::endl;
+		return true;
+	}
+	return false;
 }

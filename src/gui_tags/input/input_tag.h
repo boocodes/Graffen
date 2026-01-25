@@ -9,29 +9,30 @@
 #include <vector>
 
 
-class DivTag : public RootTag
+class InputTag : public RootTag
 {
 public:
 	float opacity = 1.0f;
 	bool visibility = true;
 	glm::vec4 borderRadius;
 	glm::vec4 backgroundColor;
-	glm::vec4 borderWidth;
 	unsigned int VAO, VBO, texture, EBO;
 	std::string backgroundImage;
+	glm::vec4 borderWidth;
 
 	int borderSize;
 	float borderOpacity;
 	glm::vec4 borderColor;
 
-	
-	DivTag(int xPos, int yPos, int zIndex, int width, int height);
-	~DivTag();
+
+	InputTag(int xPos, int yPos, int zIndex, int width, int height);
+	~InputTag();
 	float coords[20];
 	void draw();
 	bool hoverCheck(int mouseX, int mouseY);
 	bool clickCheck(int mouseX, int mouseY);
-	
+	std::string value;
+	bool is_active;
 	void setBorder(int size, glm::vec4 color);
 	void setBorderOpacity(float opacity);
 

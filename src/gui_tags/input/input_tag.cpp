@@ -1,20 +1,22 @@
-#include "div_tag.h"
+#include "input_tag.h"
 
 
 
 
-DivTag::DivTag(int xPos, int yPos, int zIndex, int width, int height)
+InputTag::InputTag(int xPos, int yPos, int zIndex, int width, int height)
 {
-	this->tagType = "Div";
+	this->tagType = "Input";
 	this->borderRadius = glm::vec4(50, 50, 50, 50);
 	this->xPos = xPos;
 	this->yPos = yPos;
 	this->zIndex = zIndex;
 	this->width = width;
-	this->visibility = true;
-	this->height = height;
 	this->borderWidth = glm::vec4(0, 0, 0, 0);
 	this->borderColor = glm::vec4(0, 0, 0, 0);
+	this->value = "";
+	this->is_active = false;
+	this->visibility = true;
+	this->height = height;
 	this->backgroundColor = glm::vec4(0, 0, 0, 1);
 
 	glGenVertexArrays(1, &this->VAO);
@@ -36,13 +38,13 @@ DivTag::DivTag(int xPos, int yPos, int zIndex, int width, int height)
 	glEnableVertexAttribArray(0);
 }
 
-void DivTag::draw()
+void InputTag::draw()
 {
 	if (this->visibility)
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		
+
 		divGuiShader.use();
 		divGuiShader.setMat4("projection", pixelPlacementProjection);
 		divGuiShader.setVec2("size", glm::vec2(this->width, this->height));
@@ -51,12 +53,12 @@ void DivTag::draw()
 		divGuiShader.setVec4("borderRadius", this->borderRadius);
 
 		divGuiShader.setInt("borderSize", this->borderSize);
-		
+
 		divGuiShader.setFloat("borderOpacity", this->borderOpacity);
 		divGuiShader.setFloat("smoothing", 1.0f);
 		divGuiShader.setVec4("borderWidth", this->borderWidth);
 		divGuiShader.setVec4("borderColor", this->borderColor);
-			
+
 		glBindVertexArray(this->VAO);
 		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 		glBindVertexArray(0);
@@ -65,35 +67,35 @@ void DivTag::draw()
 }
 
 
-bool DivTag::clickCheck(int mouseX, int mouseY)
+bool InputTag::clickCheck(int mouseX, int mouseY)
 {
 	if (((mouseX >= this->xPos) && (mouseX <= this->xPos + this->width)) && ((mouseY >= this->yPos) && (mouseY <= this->yPos + this->height)))
 	{
-		std::cout << "from div!" << std::endl;
+		std::cout << "from input!" << std::endl;
 		return true;
 	}
 	return false;
 }
 
-bool DivTag::hoverCheck(int mouseX, int mouseY)
+bool InputTag::hoverCheck(int mouseX, int mouseY)
 {
 	return true;
 }
 
 
-void DivTag::setBorder(int size, glm::vec4 color)
+void InputTag::setBorder(int size, glm::vec4 color)
 {
 	this->borderSize = size;
 	this->borderColor = color;
 }
 
-void DivTag::setBorderOpacity(float opacity)
+void InputTag::setBorderOpacity(float opacity)
 {
 	this->borderOpacity = opacity;
 }
 
 
-DivTag::~DivTag()
+InputTag::~InputTag()
 {
 
 }

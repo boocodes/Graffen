@@ -18,3 +18,11 @@ void DocumentTag::render()
 		i->draw();
 	}
 }
+
+void DocumentTag::check_click(int mouseX, int mouseY)
+{
+	for (auto i : this->tagsList)
+	{
+		i->clickCheck(mouseX, mouseY);
+	}
+}
