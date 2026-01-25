@@ -14,5 +14,6 @@ public:
 	std::vector<RootTag*> tagsList;
 	void render();
 	void add_tag(RootTag* tag);
+	void check_click(int mouseX, int mouseY);
 	DocumentTag();
 };
