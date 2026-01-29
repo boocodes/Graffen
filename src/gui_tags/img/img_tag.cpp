@@ -160,9 +160,27 @@ void ImgTag::resize(int new_width, int new_height)
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+}
 
-	
 
+void ImgTag::centred_x(int parent_width)
+{
+	if (parent_width <= this->width)
+	{
+		return;
+	}
+	this->xPos = (parent_width - this->width) / 2;
+	this->resize(this->width, this->height);
+}
+
+void ImgTag::centred_y(int parent_height)
+{
+	if (parent_height <= this->height)
+	{
+		return;
+	}
+	this->yPos = (parent_height - this->height) / 2;
+	this->resize(this->width, this->height);
 }
 
 

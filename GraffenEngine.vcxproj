@@ -135,6 +135,7 @@
     <ClCompile Include="src\global\global.cpp" />
     <ClCompile Include="src\gui_tags\div\div_tag.cpp" />
     <ClCompile Include="src\gui_tags\document\document_tag.cpp" />
+    <ClCompile Include="src\gui_tags\form\form_tag.cpp" />
     <ClCompile Include="src\gui_tags\img\img_tag.cpp" />
     <ClCompile Include="src\gui_tags\input\input_tag.cpp" />
     <ClCompile Include="src\gui_tags\p\p_tag.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="src\global\global.h" />
     <ClInclude Include="src\gui_tags\div\div_tag.h" />
     <ClInclude Include="src\gui_tags\document\document_tag.h" />
+    <ClInclude Include="src\gui_tags\form\form_tag.h" />
     <ClInclude Include="src\gui_tags\img\img_tag.h" />
     <ClInclude Include="src\gui_tags\input\input_tag.h" />
     <ClInclude Include="src\gui_tags\p\p_tag.h" />

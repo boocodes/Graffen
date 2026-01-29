@@ -31,6 +31,9 @@ public:
 	void draw();
 	bool hoverCheck(int mouseX, int mouseY);
 	bool clickCheck(int mouseX, int mouseY);
+
+	void centred_x(int parent_width);
+	void centred_y(int parent_height);
 	
 	void setBorder(int size, glm::vec4 color);
 	void setBorderOpacity(float opacity);

@@ -27,6 +27,6 @@ public:
 	bool hoverCheck(int mouse_x, int mouse_y);
 	bool clickCheck(int mouse_x, int mouse_y);
 	void resize(int new_width, int new_height);
-
-
+	void centred_x(int parent_width);
+	void centred_y(int parent_height);
 };

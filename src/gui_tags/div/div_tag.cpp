@@ -70,6 +70,7 @@ bool DivTag::clickCheck(int mouseX, int mouseY)
 	if (((mouseX >= this->xPos) && (mouseX <= this->xPos + this->width)) && ((mouseY >= this->yPos) && (mouseY <= this->yPos + this->height)))
 	{
 		std::cout << "from div!" << std::endl;
+		this->onClick();
 		return true;
 	}
 	return false;
@@ -90,6 +91,59 @@ void DivTag::setBorder(int size, glm::vec4 color)
 void DivTag::setBorderOpacity(float opacity)
 {
 	this->borderOpacity = opacity;
+}
+
+
+void DivTag::centred_x(int parent_width)
+{
+	if (parent_width <= this->width)
+	{
+		return;
+	}
+	this->xPos = (parent_width - this->width) / 2;
+	glGenVertexArrays(1, &this->VAO);
+	glGenBuffers(1, &this->VBO);
+	glBindVertexArray(this->VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+	float coords[12] = {
+		this->xPos,               this->yPos + this->height, this->zIndex,
+		this->xPos + this->width, this->yPos + this->height, this->zIndex,
+		this->xPos + this->width, this->yPos,                this->zIndex,
+		this->xPos,               this->yPos,                this->zIndex,
+	};
+	for (size_t i = 0; i < 12; i++)
+	{
+		this->coords[i] = coords[i];
+	}
+	glBufferData(GL_ARRAY_BUFFER, sizeof(this->coords), this->coords, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
+	glEnableVertexAttribArray(0);
+}
+
+void DivTag::centred_y(int parent_height)
+{
+	if (parent_height <= this->height)
+	{
+		return;
+	}
+	this->yPos = (parent_height - this->height) / 2;
+	glGenVertexArrays(1, &this->VAO);
+	glGenBuffers(1, &this->VBO);
+	glBindVertexArray(this->VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+	float coords[12] = {
+		this->xPos,               this->yPos + this->height, this->zIndex,
+		this->xPos + this->width, this->yPos + this->height, this->zIndex,
+		this->xPos + this->width, this->yPos,                this->zIndex,
+		this->xPos,               this->yPos,                this->zIndex,
+	};
+	for (size_t i = 0; i < 12; i++)
+	{
+		this->coords[i] = coords[i];
+	}
+	glBufferData(GL_ARRAY_BUFFER, sizeof(this->coords), this->coords, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
+	glEnableVertexAttribArray(0);
 }
 
 
