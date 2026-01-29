@@ -142,3 +142,45 @@ void FontModule::init(std::string font_name, int pixel_size_px)
 	glBindVertexArray(0);
 
 }
+
+
+float FontModule::get_text_width(const std::string& text)
+{
+	float result_width = 0.0f;
+
+	for (char c : text)
+	{
+		if (Characters.find(c) != Characters.end())
+		{
+			Character ch = Characters.at(c);
+			result_width += (ch.Advance >> 6);
+		}
+	}
+
+	return result_width;
+}
+
+
+float FontModule::get_text_height()
+{
+	if (Characters.find('H') != Characters.end())
+	{
+		return Characters.at('H').Size.y;
+	}
+	else if (Characters.find('A') != Characters.end())
+	{
+		return Characters.at('A').Size.y;
+	}
+
+	if (!Characters.empty())
+	{
+		return Characters.begin()->second.Size.y;
+	}
+	return this->pixel_size_px;
+}
+
+
+glm::vec2 FontModule::get_text_size(const std::string& text)
+{
+	return glm::vec2(get_text_width(text), get_text_height());
+}

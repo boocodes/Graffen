@@ -4,9 +4,12 @@
 #include <../stb_image.h>
 #include <glm/glm.hpp>
 #include <string>
+#include <httplib.h>
+
+
 
 class UtilModule
 {
 public:
-	static glm::vec3 hexToVec3(const std::string& hexColor);
+	static glm::vec3 hex_to_vec3(const std::string& hexColor);
 };
