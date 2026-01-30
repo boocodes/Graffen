@@ -20,7 +20,7 @@ glm::mat4 imageProjection = glm::ortho(
 glm::mat4 pixelPlacementProjection = glm::ortho(
 	0.0f, static_cast<float>(WIDTH),
 	static_cast<float>(HEIGHT), 0.0f,
-	100.0f, -100.0f
+	-100.0f, 100.0f
 );
 
 ShaderModule fontShader;

@@ -60,6 +60,9 @@
     <ClCompile Include="src\gui_tags\form\form_tag.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\gui_tags\button\button_tag.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\glad\glad.h">
@@ -114,6 +117,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="src\gui_tags\form\form_tag.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui_tags\button\button_tag.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

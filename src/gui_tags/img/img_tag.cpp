@@ -183,6 +183,30 @@ void ImgTag::centred_y(int parent_height)
 	this->resize(this->width, this->height);
 }
 
+void ImgTag::margin_top(int margin)
+{
+	this->yPos = xPos + margin;
+	this->resize(this->width, this->height);
+}
+
+void ImgTag::margin_left(int margin)
+{
+	this->xPos = xPos + margin;
+	this->resize(this->width, this->height);
+}
+
+void ImgTag::margin_right(int margin)
+{
+	this->xPos = xPos - margin;
+	this->resize(this->width, this->height);
+}
+
+void ImgTag::margin_bottom(int margin)
+{
+	this->yPos = yPos - margin;
+	this->resize(this->width, this->height);
+}
+
 
 bool ImgTag::hoverCheck(int mouseX, int mouseY)
 {

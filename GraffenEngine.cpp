@@ -2,12 +2,14 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <global/global.h>
+#include <module/util/util_module.h>
 #include <gui_tags/p/p_tag.h>
 #include <gui_tags/div/div_tag.h>
 #include <gui_tags/img/img_tag.h>
 #include <gui_tags/document/document_tag.h>
 #include <gui_tags/input/input_tag.h>
 #include <gui_tags/form/form_tag.h>
+#include <gui_tags/button/button_tag.h>
 
 
 
@@ -76,12 +78,38 @@ int main()
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
 
-
-   
+    PTag* ptt = new PTag(0, 200, glm::vec3(0, 1, 1), 32, "assets/fonts/Roboto-Bold.ttf", "Hello", 5);
+    dc->add_tag(ptt);
     ImgTag* background_image = new ImgTag(0, 0, 1, "assets/main_menu.png");
     dc->add_tag(background_image);
-    ImgTag* background_menu_logo = new ImgTag(50, 50, 1, "assets/main_menu_logo.png");
+    ImgTag* background_menu_logo = new ImgTag(0, 0, 1, "assets/main_menu_logo.png");
     dc->add_tag(background_menu_logo);
+    background_menu_logo->margin_top(111);
+    background_menu_logo->margin_left(178);
+
+    ButtonTag* play_button = new ButtonTag(0, 0, 2, 320, 60, "PLAY GAME");
+    play_button->change_font("assets/fonts/Roboto-Bold.ttf");
+    play_button->change_font_color(UtilModule::hex_to_vec3("B5ACA5"));
+    play_button->change_font_size(58);
+    play_button->margin_left(180);
+    play_button->margin_top(137);
+    dc->add_tag(play_button);
+
+    ButtonTag* inventory_button = new ButtonTag(0, 0, 2, 320, 60, "INVENTORY");
+    inventory_button->change_font("assets/fonts/Roboto-Bold.ttf");
+    inventory_button->change_font_color(UtilModule::hex_to_vec3("B5ACA5"));
+    inventory_button->change_font_size(58);
+    inventory_button->margin_left(180);
+    inventory_button->margin_top(270);
+    dc->add_tag(inventory_button);
+
+    ButtonTag* shop_button = new ButtonTag(0, 0, 2, 320, 60, "SHOP");
+    shop_button->change_font("assets/fonts/Roboto-Bold.ttf");
+    shop_button->change_font_color(UtilModule::hex_to_vec3("B5ACA5"));
+    shop_button->change_font_size(58);
+    shop_button->margin_left(0);
+    shop_button->margin_top(320);
+    dc->add_tag(shop_button);
 
 
     

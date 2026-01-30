@@ -13,6 +13,7 @@ void DocumentTag::add_tag(RootTag* tag)
 
 void DocumentTag::render()
 {
+
 	for (auto i : this->tagsList)
 	{
 		i->draw();

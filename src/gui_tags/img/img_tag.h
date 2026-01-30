@@ -29,4 +29,11 @@ public:
 	void resize(int new_width, int new_height);
 	void centred_x(int parent_width);
 	void centred_y(int parent_height);
+	
+
+
+	void margin_top(int margin);
+	void margin_left(int margin);
+	void margin_right(int margin);
+	void margin_bottom(int margin);
 };
