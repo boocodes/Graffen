@@ -133,6 +133,7 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="GraffenEngine.cpp" />
     <ClCompile Include="src\global\global.cpp" />
+    <ClCompile Include="src\gui_tags\button\button_tag.cpp" />
     <ClCompile Include="src\gui_tags\div\div_tag.cpp" />
     <ClCompile Include="src\gui_tags\document\document_tag.cpp" />
     <ClCompile Include="src\gui_tags\form\form_tag.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="include\KHR\khrplatform.h" />
     <ClInclude Include="include\tinyxml2.h" />
     <ClInclude Include="src\global\global.h" />
+    <ClInclude Include="src\gui_tags\button\button_tag.h" />
     <ClInclude Include="src\gui_tags\div\div_tag.h" />
     <ClInclude Include="src\gui_tags\document\document_tag.h" />
     <ClInclude Include="src\gui_tags\form\form_tag.h" />

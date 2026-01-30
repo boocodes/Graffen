@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <glad/glad.h>
 #include <gui_tags/root/root_tag.h>
 
 
