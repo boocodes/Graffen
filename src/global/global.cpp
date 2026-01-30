@@ -1,7 +1,7 @@
 #include "global.h"
 
-int WIDTH = 600;
-int HEIGHT = 800;
+int WIDTH = 1920;
+int HEIGHT = 1080;
 
 int MOUSE_X_POS = 0;
 int MOUSE_Y_POS = 0;
