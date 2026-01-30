@@ -33,14 +33,19 @@ int main()
     {
         return -1;
     }
+
+    GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode* mode = glfwGetVideoMode(primaryMonitor);
     
-    window = glfwCreateWindow(WIDTH, HEIGHT, WINDOW_TITLE.c_str(), NULL, NULL);
+    window = glfwCreateWindow(mode->width, mode->height, WINDOW_TITLE.c_str(), primaryMonitor, NULL);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetCharCallback(window, character_callback);
     glfwSetKeyCallback(window, key_callback);
- 
-    GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
+    glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+
+
+   
 
     int monitorX, monitorY, monitorWidth, monitorHeight;
     glfwGetMonitorWorkarea(primaryMonitor, &monitorX, &monitorY, &monitorWidth, &monitorHeight);
@@ -73,20 +78,19 @@ int main()
 
 
    
-   
-    InputTag *inpt = new InputTag(250, 400, 1, 150, 50);
-    InputTag* inpt2 = new InputTag(250, 200, 1, 150, 50);
-    inpt2->set_value("test");
-  
-    ftag->add_element(inpt);
-    ftag->add_element(inpt2);
+    ImgTag* background_image = new ImgTag(0, 0, 1, "assets/main_menu.png");
+    dc->add_tag(background_image);
+    ImgTag* background_menu_logo = new ImgTag(50, 50, 1, "assets/main_menu_logo.png");
+    dc->add_tag(background_menu_logo);
+
+
     
     while (!glfwWindowShouldClose(window))
     {
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        ftag->render();
+        dc->render();
 
         glfwSwapBuffers(window);
 
@@ -150,7 +154,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     {
         if (input->is_active)
         {
-            if (action == GLFW_PRESS)
+            if (action == GLFW_PRESS || action == GLFW_REPEAT)
             {
                 switch (key)
                 {
