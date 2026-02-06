@@ -48,6 +48,21 @@
     <ClCompile Include="src\2D\gui_tags\display\display_tags_container\display_tags_container.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\2D\gui_tags\form\form_container\form_tags_container.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2D\gui_tags\form\root\root.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2D\gui_tags\form\input_radio\input_radio.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2D\gui_tags\form\input_range\input_range.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2D\gui_tags\form\input_simple\input_simple.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -75,6 +90,21 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="src\2D\gui_tags\display\display_tags_container\display_tags_container.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\2D\gui_tags\form\form_container\form_tags_container.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\2D\gui_tags\form\root\root.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\2D\gui_tags\form\input_radio\input_radio.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\2D\gui_tags\form\input_range\input_range.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\2D\gui_tags\form\input_simple\input_simple.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

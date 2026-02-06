@@ -135,6 +135,11 @@
     <ClCompile Include="src\2D\gui_tags\display\div\div.cpp" />
     <ClCompile Include="src\2D\gui_tags\display\img\img.cpp" />
     <ClCompile Include="src\2D\gui_tags\display\root\root.cpp" />
+    <ClCompile Include="src\2D\gui_tags\form\form_container\form_tags_container.cpp" />
+    <ClCompile Include="src\2D\gui_tags\form\input_radio\input_radio.cpp" />
+    <ClCompile Include="src\2D\gui_tags\form\input_range\input_range.cpp" />
+    <ClCompile Include="src\2D\gui_tags\form\input_simple\input_simple.cpp" />
+    <ClCompile Include="src\2D\gui_tags\form\root\root.cpp" />
     <ClCompile Include="src\2D\modules\shader\shader.cpp" />
     <ClCompile Include="src\2D\modules\utils\utils.cpp" />
     <ClCompile Include="src\2D\modules\window\window.cpp" />
@@ -148,6 +153,11 @@
     <ClInclude Include="src\2D\gui_tags\display\div\div.h" />
     <ClInclude Include="src\2D\gui_tags\display\img\img.h" />
     <ClInclude Include="src\2D\gui_tags\display\root\root.h" />
+    <ClInclude Include="src\2D\gui_tags\form\form_container\form_tags_container.h" />
+    <ClInclude Include="src\2D\gui_tags\form\input_radio\input_radio.h" />
+    <ClInclude Include="src\2D\gui_tags\form\input_range\input_range.h" />
+    <ClInclude Include="src\2D\gui_tags\form\input_simple\input_simple.h" />
+    <ClInclude Include="src\2D\gui_tags\form\root\root.h" />
     <ClInclude Include="src\2D\modules\shader\shader.h" />
     <ClInclude Include="src\2D\modules\utils\utils.h" />
     <ClInclude Include="src\2D\modules\window\window.h" />
