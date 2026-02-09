@@ -30,7 +30,7 @@
     <ClCompile Include="src\2D\modules\utils\utils.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\2D\gui_tags\display\root\root.cpp">
+    <ClCompile Include="src\2D\gui_tags\display\root\root_display.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\2D\gui_tags\display\div\div.cpp">
@@ -48,10 +48,10 @@
     <ClCompile Include="src\2D\gui_tags\display\display_tags_container\display_tags_container.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\2D\gui_tags\form\form_container\form_tags_container.cpp">
+    <ClCompile Include="src\2D\gui_tags\form\form_tags_container\form_tags_container.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\2D\gui_tags\form\root\root.cpp">
+    <ClCompile Include="src\2D\gui_tags\form\root\root_form.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\2D\gui_tags\form\input_radio\input_radio.cpp">
@@ -74,7 +74,7 @@
     <ClInclude Include="src\2D\modules\utils\utils.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\2D\gui_tags\display\root\root.h">
+    <ClInclude Include="src\2D\gui_tags\display\root\root_display.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="src\2D\gui_tags\display\div\div.h">
@@ -92,10 +92,10 @@
     <ClInclude Include="src\2D\gui_tags\display\display_tags_container\display_tags_container.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\2D\gui_tags\form\form_container\form_tags_container.h">
+    <ClInclude Include="src\2D\gui_tags\form\form_tags_container\form_tags_container.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\2D\gui_tags\form\root\root.h">
+    <ClInclude Include="src\2D\gui_tags\form\root\root_form.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="src\2D\gui_tags\form\input_radio\input_radio.h">

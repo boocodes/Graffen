@@ -1,5 +1,6 @@
 #include "window.h"
 #include <iostream>
+#include <2D/gui_tags/display/div/div.h>
 
 
 
@@ -34,16 +35,20 @@ WindowModule::WindowModule()
 	{
 		return;
 	}
+
 }
 
 
 void WindowModule::render()
 {
+
+	DivDisplayTag* div = new DivDisplayTag(10, 20, 1, 100, 100);
+	div->set_background_color(glm::vec4(0, 1, 1, 1));
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+		div->draw();
 		glfwSwapBuffers(window);
 		std::cout << "x - " << this->mouse_x << ", y - " << this->mouse_y << std::endl;
 		glfwPollEvents();
@@ -102,3 +107,32 @@ int WindowModule::get_window_height()
 	return this->height;
 }
 
+void WindowModule::set_form_tags_container(FormTagsContainer container)
+{
+	this->form_tags_container = container;
+}
+
+void WindowModule::set_display_tags_container(DisplayTagsContainer container)
+{
+	this->display_tags_container = container;
+}
+
+FormTagsContainer WindowModule::get_form_tags_container()
+{
+	return this->form_tags_container;
+}
+
+DisplayTagsContainer WindowModule::get_display_tags_container()
+{
+	return this->display_tags_container;
+}
+
+void WindowModule::add_form_tag(RootFormTag* tag)
+{
+	this->form_tags_container.add_tag(tag);
+}
+
+void WindowModule::add_display_tag(RootDisplayTag* tag)
+{
+	this->display_tags_container.add_tag(tag);
+}

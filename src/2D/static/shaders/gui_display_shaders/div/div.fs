@@ -2,10 +2,10 @@
 out vec4 FragColor;
 
 uniform vec4 color;            
-uniform vec4 borderColor;     
-uniform vec4 borderWidth;
+uniform vec4 border_color;     
+uniform vec4 border_width;
 uniform vec2 size;
-uniform vec4 borderRadius;
+uniform vec4 border_radius;
 uniform vec2 position;
 uniform float smoothing;
 
@@ -49,12 +49,12 @@ void main() {
     vec2 center = halfSize;
     vec2 p = localPos - center;
     
-    float outerDist = roundedRectSDF(p, halfSize, borderRadius);
+    float outerDist = roundedRectSDF(p, halfSize, border_radius);
     
-    float borderTop = borderWidth.x;
-    float borderRight = borderWidth.y;
-    float borderBottom = borderWidth.z;
-    float borderLeft = borderWidth.w;
+    float borderTop = border_width.x;
+    float borderRight = border_width.y;
+    float borderBottom = border_width.z;
+    float borderLeft = border_width.w;
     
     bool hasAnyBorder = borderTop > 0.0 || borderRight > 0.0 || 
                        borderBottom > 0.0 || borderLeft > 0.0;
@@ -62,14 +62,14 @@ void main() {
     bool hasFill = color.a > 0.001;
     
     vec2 innerHalfSize = halfSize;
-    vec4 innerRadius = borderRadius;
+    vec4 innerRadius = border_radius;
     
     if (hasAnyBorder) {
         float minHorizontalBorder = min(borderLeft, borderRight);
         float minVerticalBorder = min(borderTop, borderBottom);
         
         innerHalfSize = halfSize - vec2(minHorizontalBorder, minVerticalBorder);
-        innerRadius = max(borderRadius - vec4(
+        innerRadius = max(border_radius - vec4(
             borderTop, borderRight, borderBottom, borderLeft
         ), vec4(0.0));
     }
@@ -79,10 +79,10 @@ void main() {
     float alpha = 0.0;
     vec4 finalColor = vec4(0.0);
     
-    if (hasAnyBorder && borderColor.a > 0.001) {
+    if (hasAnyBorder && border_color.a > 0.001) {
         if (outerDist <= 0.0 && innerDist > 0.0) {
-            alpha = borderColor.a;
-            finalColor = borderColor;
+            alpha = border_color.a;
+            finalColor = border_color;
         }
     }
     

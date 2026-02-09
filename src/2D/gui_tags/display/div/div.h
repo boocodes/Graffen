@@ -1,19 +1,19 @@
 #pragma once
-#include "2D/gui_tags/display/root/root.h"
+#include <2D/gui_tags/display/root/root_display.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/glm.hpp>
 #include <string>
 #include <glad/glad.h>
 #include <iostream>
-#include "2D/global/global.h"
+#include <2D/global/global.h>
 
 
 
 class DivDisplayTag : public RootDisplayTag
 {
 private:
-	int coords[12];
+	float coords[12];
 
 	glm::vec4 border_radius;
 	glm::vec4 background_color;
@@ -39,7 +39,7 @@ public:
 	void set_border_radius(glm::vec4 new_border_radius);
 	void set_background_color(glm::vec4 new_background_color);
 	void set_border_width(glm::vec4 new_border_width);
-	void set_border_colo(glm::vec4 new_border_color);
+	void set_border_color(glm::vec4 new_border_color);
 	void set_border_opacity(float border_opacity);	
 
 

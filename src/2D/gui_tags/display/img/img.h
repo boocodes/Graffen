@@ -1,10 +1,10 @@
 #pragma once
-#include "2D/gui_tags/display/root/root.h"
+#include "2D/gui_tags/display/root/root_display.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/glm.hpp>
-#include "2D/modules/utils/utils.h"
-#include "2D/global/global.h"
+#include <2D/modules/utils/utils.h>
+#include <2D/global/global.h>
 
 class ImgDisplayTag : public RootDisplayTag
 {

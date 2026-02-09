@@ -86,3 +86,23 @@ void ImgDisplayTag::change_image(const std::string& new_image)
 	this->height = texture_entity.height;
 	this->rebuild_vertex_objects();
 }
+
+bool ImgDisplayTag::hover_check(int mouse_x, int mouse_y)
+{
+	if (((mouse_x >= this->x_pos) && (mouse_x <= this->x_pos + this->width)) && ((mouse_y >= this->y_pos) && (mouse_y <= this->y_pos + this->height)))
+	{
+		//std::cout << "hovered from IMG!" << std::endl;
+		return true;
+	}
+	return false;
+}
+
+bool ImgDisplayTag::click_check(int mouse_x, int mouse_y)
+{
+	if (((mouse_x >= this->x_pos) && (mouse_x <= this->x_pos + this->width)) && ((mouse_y >= this->y_pos) && (mouse_y <= this->y_pos + this->height)))
+	{
+		//std::cout << "clicked from IMG!" << std::endl;
+		return true;
+	}
+	return false;
+}

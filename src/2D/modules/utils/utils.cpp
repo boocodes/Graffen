@@ -77,7 +77,7 @@ TextureEntity UtilModule::get_texture(const char* image_path)
         default: 
             std::cout << "Unsupported number of loading image channels: " << result_texture.nr_channels << std::endl;
             stbi_image_free(data);
-            return;
+            return result_texture;
         }
         glTexImage2D(GL_TEXTURE_2D, 0, format, result_texture.width, result_texture.height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
