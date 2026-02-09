@@ -2,7 +2,12 @@
 
 
 
-DivDisplayTag::~DivDisplayTag() {};
+DivDisplayTag::~DivDisplayTag() 
+{
+	if (VAO != 0) glDeleteVertexArrays(1, &VAO);
+	if (VBO != 0) glDeleteBuffers(1, &VBO);
+	if (texture != 0) glDeleteTextures(1, &texture);
+};
 
 DivDisplayTag::DivDisplayTag(int x_pos, int y_pos, int z_pos, int width, int height)
 {
@@ -11,8 +16,8 @@ DivDisplayTag::DivDisplayTag(int x_pos, int y_pos, int z_pos, int width, int hei
 	this->VBO = 0;
 	this->border_opacity = 1.0f;
 	this->border_radius = glm::vec4(0, 0, 0, 0);
-	this->coords[12] = {};
 	this->texture = 0;
+	this->visibility = true;
 
 	this->tag_type = "Div";
 	this->self_id = 1; // temporary replacement of ID issuance
@@ -26,6 +31,7 @@ DivDisplayTag::DivDisplayTag(int x_pos, int y_pos, int z_pos, int width, int hei
 	this->border_color = glm::vec4(0, 0, 0, 0);
 	this->background_color = glm::vec4(0, 0, 0, 1);
 
+	this->rebuild_vertex_objects();
 	
 }
 
@@ -45,10 +51,10 @@ void DivDisplayTag::rebuild_vertex_objects()
 		this->x_pos + this->width, this->y_pos,                this->z_pos,
 		this->x_pos,               this->y_pos,                this->z_pos,
 	};
-
+		
 	for (size_t i = 0; i < 12; i++)
 	{
-		this->coords[i] = coords[i];
+		this->coords[i] = new_coords[i];
 	}
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(this->coords), this->coords, GL_STATIC_DRAW);
@@ -86,8 +92,9 @@ bool DivDisplayTag::hover_check(int mouse_x, int mouse_y)
 
 void DivDisplayTag::draw()
 {
+	
 	if (!this->visibility) return;
-
+	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -111,3 +118,35 @@ void DivDisplayTag::draw()
 	glBindVertexArray(0);
 	glDisable(GL_BLEND);
 }
+
+
+void DivDisplayTag::set_border_radius(glm::vec4 new_border_radius)
+{
+	this->border_radius = new_border_radius;
+}
+
+void DivDisplayTag::set_background_color(glm::vec4 new_background_color)
+{
+	this->background_color = new_background_color;
+}
+
+void DivDisplayTag::set_border_width(glm::vec4 new_border_width)
+{
+	this->border_width = new_border_width;
+}
+
+void DivDisplayTag::set_border_color(glm::vec4 new_border_color)
+{
+	this->border_color = new_border_color;
+}
+
+void DivDisplayTag::set_border_opacity(float border_opacity)
+{
+	this->border_opacity = border_opacity;
+}
+
+void DivDisplayTag::set_background_image(const std::string& new_image)
+{
+	this->background_image = new_image;
+}
+

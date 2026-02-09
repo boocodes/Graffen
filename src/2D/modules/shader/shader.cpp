@@ -244,3 +244,8 @@ void ShaderModule::check_compile_errors(GLuint shader, const std::string& type)
         }
     }
 }
+
+unsigned int ShaderModule::get_ID()
+{
+    return this->ID;
+}
