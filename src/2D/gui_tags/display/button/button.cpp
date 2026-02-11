@@ -89,17 +89,17 @@ void ButtonDisplayTag::draw()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	div_display_tag_shader.use();
-	div_display_tag_shader.set_mat4("projection", pixel_placement_projection);
-	div_display_tag_shader.set_vec2("size", glm::vec2(this->width, this->height));
-	div_display_tag_shader.set_vec2("position", glm::vec2(this->x_pos, this->y_pos));
-	div_display_tag_shader.set_vec4("color", this->background_color);
-	div_display_tag_shader.set_vec4("border_radius", this->border_radius);
-	div_display_tag_shader.set_int("border_size", 1);
-	div_display_tag_shader.set_float("border_opacity", this->border_opacity);
-	div_display_tag_shader.set_float("smoothing", 1.0f);
-	div_display_tag_shader.set_vec4("border_width", this->border_width);
-	div_display_tag_shader.set_vec4("border_color", this->border_color);
+	button_display_tag_shader.use();
+	button_display_tag_shader.set_mat4("projection", pixel_placement_projection);
+	button_display_tag_shader.set_vec2("size", glm::vec2(this->width, this->height));
+	button_display_tag_shader.set_vec2("position", glm::vec2(this->x_pos, this->y_pos));
+	button_display_tag_shader.set_vec4("color", this->background_color);
+	button_display_tag_shader.set_vec4("border_radius", this->border_radius);
+	button_display_tag_shader.set_int("border_size", 1);
+	button_display_tag_shader.set_float("border_opacity", this->border_opacity);
+	button_display_tag_shader.set_float("smoothing", 1.0f);
+	button_display_tag_shader.set_vec4("border_width", this->border_width);
+	button_display_tag_shader.set_vec4("border_color", this->border_color);
 
 	glBindVertexArray(this->VAO);
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);

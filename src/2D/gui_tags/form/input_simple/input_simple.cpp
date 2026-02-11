@@ -57,20 +57,20 @@ void InputSimpleFormTag::draw()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	
+	input_simple_form_tag_shader.use();
+	input_simple_form_tag_shader.set_mat4("projection", pixel_placement_projection);
+	input_simple_form_tag_shader.set_vec2("size", glm::vec2(this->width, this->height));
+	input_simple_form_tag_shader.set_vec2("position", glm::vec2(x_pos, y_pos));
+	input_simple_form_tag_shader.set_vec4("color", this->background_color);
+	input_simple_form_tag_shader.set_vec4("borderRadius", this->border_radius);
 
-	div_display_tag_shader.use();
-	div_display_tag_shader.set_mat4("projection", pixel_placement_projection);
-	div_display_tag_shader.set_vec2("size", glm::vec2(this->width, this->height));
-	div_display_tag_shader.set_vec2("position", glm::vec2(x_pos, y_pos));
-	div_display_tag_shader.set_vec4("color", this->background_color);
-	div_display_tag_shader.set_vec4("borderRadius", this->border_radius);
+	input_simple_form_tag_shader.set_int("borderSize", 1);
 
-	div_display_tag_shader.set_int("borderSize", 1);
-
-	div_display_tag_shader.set_float("borderOpacity", this->border_opacity);
-	div_display_tag_shader.set_float("smoothing", 1.0f);
-	div_display_tag_shader.set_vec4("borderWidth", this->border_width);
-	div_display_tag_shader.set_vec4("borderColor", this->border_color);
+	input_simple_form_tag_shader.set_float("borderOpacity", this->border_opacity);
+	input_simple_form_tag_shader.set_float("smoothing", 1.0f);
+	input_simple_form_tag_shader.set_vec4("borderWidth", this->border_width);
+	input_simple_form_tag_shader.set_vec4("borderColor", this->border_color);
 	
 
 	glBindVertexArray(this->VAO);

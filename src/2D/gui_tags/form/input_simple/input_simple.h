@@ -3,6 +3,7 @@
 #include <2D/global/global.h>
 #include <2D/gui_tags/display/text/text.h>
 
+
 class InputSimpleFormTag : public RootFormTag
 {
 private:

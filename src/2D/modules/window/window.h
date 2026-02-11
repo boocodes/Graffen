@@ -2,11 +2,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <string>
-#include <2D/gui_tags/display/display_tags_container/display_tags_container.h>
-#include <2D/gui_tags/form/form_tags_container/form_tags_container.h>
 #include <2D/gui_tags/display/root/root_display.h>
 #include <2D/gui_tags/form/root/root_form.h>
-
+#include <2D/gui_tags/display/display_tags_container/display_tags_container.h>
+#include <2D/gui_tags/form/form_tags_container/form_tags_container.h>
 
 class WindowModule
 {
