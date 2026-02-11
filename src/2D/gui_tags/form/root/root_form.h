@@ -1,8 +1,6 @@
 #pragma once
 #include <string>
 #include <functional>
-#include <2D/gui_tags/display/text/text.h>
-
 
 class RootFormTag
 {
@@ -20,8 +18,8 @@ protected:
 	std::string class_name;
 	std::function<void()> on_click = 0;
 	std::function<void()> on_hover = 0;
-	virtual ~RootFormTag() = default;
 public: 
+	virtual ~RootFormTag() = default;
 	std::string get_tag_type();
 	int get_z_pos();
 	virtual void draw() = 0;
