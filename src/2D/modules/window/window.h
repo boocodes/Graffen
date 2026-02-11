@@ -11,6 +11,7 @@
 class WindowModule
 {
 private:
+	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 	static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 	FormTagsContainer form_tags_container;
 	DisplayTagsContainer display_tags_container;
@@ -30,6 +31,7 @@ public:
 	void set_window_title(const std::string& window_title);
 	// 
 	// getters
+	GLFWwindow* get_window();
 	FormTagsContainer get_form_tags_container();
 	DisplayTagsContainer get_display_tags_container();
 	int get_window_width();
@@ -43,4 +45,7 @@ public:
 	WindowModule();
 	~WindowModule();
 	void render();
+
+	void launch_click_check();
+	void launch_hover_check();
 };

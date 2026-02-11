@@ -7,13 +7,18 @@ int RootFormTag::get_z_pos()
 }
 
 
-
-void RootFormTag::draw()
+int RootFormTag::get_self_id()
 {
-	return;
+	return this->self_id;
+}
+
+std::string RootFormTag::get_input_value()
+{
+	return this->input_form_value;
 }
 
 std::string RootFormTag::get_tag_type()
 {
 	return this->tag_type;
 }
+

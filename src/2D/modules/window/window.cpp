@@ -24,6 +24,7 @@ WindowModule::WindowModule()
 	this->height = 600;
 	glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 	glfwSetCursorPosCallback(window, cursor_position_callback);
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
 	glfwMakeContextCurrent(window);
 	glfwSetWindowUserPointer(window, this);	
 	if (!window)
@@ -35,25 +36,35 @@ WindowModule::WindowModule()
 	{
 		return;
 	}
-
+	init_shaders();
 }
 
 
 void WindowModule::render()
 {
 
-	DivDisplayTag* div = new DivDisplayTag(10, 20, 1, 100, 100);
-	div->set_background_color(glm::vec4(0, 1, 1, 1));
+	
 	while (!glfwWindowShouldClose(window))
 	{
+		std::cout << "render" << std::endl;
 		glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		div->draw();
+		this->display_tags_container.draw();
+		this->form_tags_container.draw();
 		glfwSwapBuffers(window);
-		std::cout << "x - " << this->mouse_x << ", y - " << this->mouse_y << std::endl;
 		glfwPollEvents();
 		
 	}
+}
+
+void WindowModule::launch_click_check()
+{
+	this->display_tags_container.run_click(this->mouse_x, this->mouse_y);
+}
+
+void WindowModule::launch_hover_check()
+{
+	this->display_tags_container.run_hover(this->mouse_x, this->mouse_y);
 }
 
 
@@ -64,6 +75,26 @@ void WindowModule::cursor_position_callback(GLFWwindow* window, double xpos, dou
 	{
 		WindowModule* instance = static_cast<WindowModule*>(ptr);
 		instance->set_mouse_pos(static_cast<int>(xpos), static_cast<int>(ypos));
+		instance->launch_hover_check();
+		
+	}
+}
+
+void WindowModule::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	std::cout << "click listener\n";
+	void* ptr = glfwGetWindowUserPointer(window);
+	if (ptr)
+	{
+		WindowModule* instance = static_cast<WindowModule*>(ptr);
+		if (button == GLFW_MOUSE_BUTTON_LEFT)
+		{
+			instance->launch_click_check();
+		}
+		else if (button == GLFW_RELEASE)
+		{
+
+		}
 	}
 }
 
@@ -115,6 +146,11 @@ void WindowModule::set_form_tags_container(FormTagsContainer container)
 void WindowModule::set_display_tags_container(DisplayTagsContainer container)
 {
 	this->display_tags_container = container;
+}
+
+GLFWwindow* WindowModule::get_window()
+{
+	return this->window;
 }
 
 FormTagsContainer WindowModule::get_form_tags_container()
