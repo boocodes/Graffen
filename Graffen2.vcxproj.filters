@@ -63,6 +63,12 @@
     <ClCompile Include="src\2D\gui_tags\form\input_simple\input_simple.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\2D\gui_tags\display\text\text.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2D\gui_tags\display\button\button.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -105,6 +111,12 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="src\2D\gui_tags\form\input_simple\input_simple.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\2D\gui_tags\display\text\text.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\2D\gui_tags\display\button\button.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

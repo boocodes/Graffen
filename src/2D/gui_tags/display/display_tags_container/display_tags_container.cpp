@@ -16,7 +16,6 @@
 				return a->get_z_pos() < b->get_z_pos();
 			});
 		this->tags.insert(pos, tag);
-		this->tags.insert(pos, tag);
 	}
 
 	void DisplayTagsContainer::run_click(int mouse_x, int mouse_y)
@@ -26,10 +25,16 @@
 			tag->click_check(mouse_x, mouse_y);
 		}
 	}
+	void DisplayTagsContainer::run_hover(int mouse_x, int mouse_y)
+	{
+		for (auto tag : this->tags)
+		{
+			tag->hover_check(mouse_x, mouse_y);
+		}
+	}
 
 	void DisplayTagsContainer::draw()
 	{
-		std::cout << "drawing container" << ". Size - " << this->tags.size() << std::endl;
 		for (auto tag : this->tags)
 		{
 			tag->draw();

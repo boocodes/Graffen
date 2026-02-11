@@ -1,4 +1,4 @@
-#pragma once
+	#pragma once
 #include <2D/modules/window/window.h>
 #include <glm/glm.hpp>
 #include "2D/modules/shader/shader.h"

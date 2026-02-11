@@ -15,5 +15,6 @@ public:
 	void draw();
 	void add_tag(RootDisplayTag* tag);
 	void run_click(int mouse_x, int mouse_y);
+	void run_hover(int mouse_x, int mouse_y);
 	void log_inner_data();
 };
