@@ -9,7 +9,13 @@ int main(void)
     DisplayTagsContainer dspl;
     FormTagsContainer cnt;
     InputSimpleFormTag* inpt = new InputSimpleFormTag(50, 50, 1, 100, 40);
+    inpt->set_border_width(glm::vec4(4, 4, 4, 4));
+    inpt->set_border_color(glm::vec4(0, 1, 1, 1));
+    inpt->set_background_color(glm::vec4(1, 0, 1, 1));
+    inpt->set_border_radius(glm::vec4(3, 3, 3, 3));
+    inpt->set_size(100, 200);
     cnt.add_tag(inpt);
+
     ButtonDisplayTag* btn = new ButtonDisplayTag(180, 180, 2, "clickme");
     dspl.add_tag(btn);
     root_window->set_display_tags_container(dspl);

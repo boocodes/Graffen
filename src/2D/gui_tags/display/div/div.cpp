@@ -145,6 +145,31 @@ void DivDisplayTag::set_border_opacity(float border_opacity)
 	this->border_opacity = border_opacity;
 }
 
+void DivDisplayTag::set_height(int new_height)
+{
+	this->height = new_height;
+	this->rebuild_vertex_objects();
+}
+
+void DivDisplayTag::set_width(int new_width)
+{
+	this->width = new_width;
+	this->rebuild_vertex_objects();
+}
+
+void DivDisplayTag::set_size(int new_width, int new_height)
+{
+	this->width = new_width;
+	this->height = new_height;
+	this->rebuild_vertex_objects();
+}
+
+void DivDisplayTag::set_z(int z)
+{
+	this->z_pos = z;
+	this->rebuild_vertex_objects();
+}
+
 void DivDisplayTag::set_background_image(const std::string& new_image)
 {
 	this->background_image = new_image;

@@ -75,20 +75,36 @@ void ImgDisplayTag::draw()
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-
-void ImgDisplayTag::resize(int new_width, int new_height)
-{
-	this->width = new_width;
-	this->height = new_height;
-
-	this->rebuild_vertex_objects();
-}
-
 void ImgDisplayTag::change_image(const std::string& new_image)
 {
 	this->texture_entity = UtilModule::get_texture(new_image.c_str());
 	this->width = texture_entity.width;
 	this->height = texture_entity.height;
+	this->rebuild_vertex_objects();
+}
+
+void ImgDisplayTag::set_height(int new_height)
+{
+	this->height = new_height;
+	this->rebuild_vertex_objects();
+}
+
+void ImgDisplayTag::set_width(int new_width)
+{
+	this->width = new_width;
+	this->rebuild_vertex_objects();
+}
+
+void ImgDisplayTag::set_size(int new_width, int new_height)
+{
+	this->width = new_width;
+	this->height = new_height;
+	this->rebuild_vertex_objects();
+}
+
+void ImgDisplayTag::set_z(int z)
+{
+	this->z_pos = z;
 	this->rebuild_vertex_objects();
 }
 

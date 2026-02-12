@@ -15,10 +15,10 @@ protected:
 	int width,
 		height;
 	std::string class_name;
-	std::function<void()> on_click = 0;
-	std::function<void()> on_hover = 0;
 	virtual ~RootDisplayTag() = default;
 public:
+	std::function<void()> on_click = 0;
+	std::function<void()> on_hover = 0;
 	std::string get_tag_type();
 	int get_z_pos();
 	int get_y_pos();

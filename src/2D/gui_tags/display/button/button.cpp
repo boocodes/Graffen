@@ -178,13 +178,29 @@ void ButtonDisplayTag::set_padding(glm::vec4 new_padding)
 	this->padding = new_padding;
 }
 
-void ButtonDisplayTag::resize(int new_width, int new_height)
+void ButtonDisplayTag::set_height(int new_height)
 {
-	this->width = new_width | this->width;
-	this->height = new_height | this->height;
-
+	this->height = new_height;
 	this->rebuild_vertex_objects();
 }
 
+void ButtonDisplayTag::set_width(int new_width)
+{
+	this->width = new_width;
+	this->rebuild_vertex_objects();
+}
+
+void ButtonDisplayTag::set_size(int new_width, int new_height)
+{
+	this->width = new_width;
+	this->height = new_height;
+	this->rebuild_vertex_objects();
+}
+
+void ButtonDisplayTag::set_z(int z)
+{
+	this->z_pos = z;
+	this->rebuild_vertex_objects();
+}
 
 

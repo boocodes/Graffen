@@ -1,8 +1,30 @@
 #include "input_simple.h"
 
 InputSimpleFormTag::~InputSimpleFormTag() {};
+void InputSimpleFormTag::set_border_width(glm::vec4 new_border_width)
+{
+	this->border_width = new_border_width;
+}
+void InputSimpleFormTag::set_border_radius(glm::vec4 new_border_radius)
+{
+	this->border_radius = new_border_radius;
+}
+void InputSimpleFormTag::set_background_color(glm::vec4 new_background_color)
+{
+	this->background_color = new_background_color;
+}
+void InputSimpleFormTag::set_border_opacity(float border_opacity)
+{
+	this->border_opacity = border_opacity;
+}
+void InputSimpleFormTag::set_border_color(glm::vec4 new_border_color)
+{
+	this->border_color = new_border_color;
+}
 InputSimpleFormTag::InputSimpleFormTag(int x_pos, int y_pos, int z_pos, int width, int height)
 {
+	this->background_color = glm::vec4(1, 1, 1, 1);
+	this->border_opacity = 1.0f;
 	this->tag_type = "Input";
 	this->border_color = glm::vec4(0, 0, 0, 0);
 	this->border_width = glm::vec4(0, 0, 0, 0);
@@ -29,25 +51,7 @@ InputSimpleFormTag::InputSimpleFormTag(int x_pos, int y_pos, int z_pos, int widt
 	int text_tag_width = this->text_tag->get_wrapper_text_size(this->input_form_value).x;
 
 	this->text_tag = new TextDisplayTag(this->x_pos + ((this->width - text_tag_width) / 2), this->y_pos + ((this->height - text_tag_height) / 2), this->text_tag->get_z_pos(), this->text_tag->get_font_name(), this->text_tag->get_text_display());
-
-	glGenVertexArrays(1, &this->VAO);
-	glGenBuffers(1, &this->VBO);
-	glBindVertexArray(this->VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-	float new_coords[12] = {
-		this->x_pos,               this->y_pos + this->height, this->z_pos,
-		this->x_pos + this->width, this->y_pos + this->height, this->z_pos,
-		this->x_pos + this->width, this->y_pos,                this->z_pos,
-		this->x_pos,               this->y_pos,                this->z_pos,
-	};
-
-	for (size_t i = 0; i < 12; i++)
-	{
-		this->coords[i] = new_coords[i];
-	}
-	glBufferData(GL_ARRAY_BUFFER, sizeof(this->coords), this->coords, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
-	glEnableVertexAttribArray(0);
+	this->rebuild_vertex_objects();
 };
 
 void InputSimpleFormTag::draw()
@@ -63,14 +67,14 @@ void InputSimpleFormTag::draw()
 	input_simple_form_tag_shader.set_vec2("size", glm::vec2(this->width, this->height));
 	input_simple_form_tag_shader.set_vec2("position", glm::vec2(x_pos, y_pos));
 	input_simple_form_tag_shader.set_vec4("color", this->background_color);
-	input_simple_form_tag_shader.set_vec4("borderRadius", this->border_radius);
+	input_simple_form_tag_shader.set_vec4("border_radius", this->border_radius);
 
-	input_simple_form_tag_shader.set_int("borderSize", 1);
+	input_simple_form_tag_shader.set_int("border_size", 1);
 
-	input_simple_form_tag_shader.set_float("borderOpacity", this->border_opacity);
+	input_simple_form_tag_shader.set_float("border_opacity", this->border_opacity);
 	input_simple_form_tag_shader.set_float("smoothing", 1.0f);
-	input_simple_form_tag_shader.set_vec4("borderWidth", this->border_width);
-	input_simple_form_tag_shader.set_vec4("borderColor", this->border_color);
+	input_simple_form_tag_shader.set_vec4("border_width", this->border_width);
+	input_simple_form_tag_shader.set_vec4("border_color", this->border_color);
 	
 
 	glBindVertexArray(this->VAO);
@@ -101,5 +105,53 @@ bool InputSimpleFormTag::click_check(int mouse_x, int mouse_y)
 void InputSimpleFormTag::set_value(const std::string& new_value)
 {
 	this->input_form_value = new_value;
-	this->text_tag = new TextDisplayTag(this->text_tag->get_x_pos(), this->text_tag->get_y_pos(), this->text_tag->get_z_pos(), this->text_tag->get_font_name(), this->input_form_value);
+	this->text_tag->change_text(this->input_form_value);
+}
+
+void InputSimpleFormTag::set_height(int new_height)
+{
+	this->height = new_height;
+	this->rebuild_vertex_objects();
+}
+
+void InputSimpleFormTag::set_width(int new_width)
+{
+	this->width = new_width;
+	this->rebuild_vertex_objects();
+}
+
+void InputSimpleFormTag::set_size(int new_width, int new_height)
+{
+	this->width = new_width;
+	this->height = new_height;
+	this->rebuild_vertex_objects();
+}
+
+void InputSimpleFormTag::set_z(int z)
+{
+	this->z_pos = z;
+	this->rebuild_vertex_objects();
+}
+
+
+void InputSimpleFormTag::rebuild_vertex_objects()
+{
+	glGenVertexArrays(1, &this->VAO);
+	glGenBuffers(1, &this->VBO);
+	glBindVertexArray(this->VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+	float new_coords[12] = {
+		this->x_pos,               this->y_pos + this->height, this->z_pos,
+		this->x_pos + this->width, this->y_pos + this->height, this->z_pos,
+		this->x_pos + this->width, this->y_pos,                this->z_pos,
+		this->x_pos,               this->y_pos,                this->z_pos,
+	};
+
+	for (size_t i = 0; i < 12; i++)
+	{
+		this->coords[i] = new_coords[i];
+	}
+	glBufferData(GL_ARRAY_BUFFER, sizeof(this->coords), this->coords, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
+	glEnableVertexAttribArray(0);
 }
