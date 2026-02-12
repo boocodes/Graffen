@@ -5,6 +5,7 @@
 class RootFormTag
 {
 protected:
+	bool is_active;
 	bool visibility;
 	float opacity;
 	int self_id;
@@ -27,4 +28,7 @@ public:
 	virtual bool hover_check(int mouse_x, int mouse_y) = 0;
 	virtual bool click_check(int mouse_x, int mouse_y) = 0;
 	std::string get_input_value();
+	virtual void set_value(const std::string& new_value) = 0;
+	bool get_active_flag();
+	void set_active_flag(bool active_flag);
 };

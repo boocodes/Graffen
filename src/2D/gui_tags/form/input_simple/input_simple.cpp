@@ -83,6 +83,11 @@ void InputSimpleFormTag::draw()
 
 bool InputSimpleFormTag::hover_check(int mouse_x, int mouse_y)
 {
+	return false;
+}
+
+bool InputSimpleFormTag::click_check(int mouse_x, int mouse_y)
+{
 	if (((mouse_x >= this->x_pos) && (mouse_x <= this->x_pos + this->width)) && ((mouse_y >= this->y_pos) && (mouse_y <= this->y_pos + this->height)))
 	{
 		std::cout << "from input!" << std::endl;
@@ -92,11 +97,9 @@ bool InputSimpleFormTag::hover_check(int mouse_x, int mouse_y)
 	return false;
 }
 
-bool InputSimpleFormTag::click_check(int mouse_x, int mouse_y)
+
+void InputSimpleFormTag::set_value(const std::string& new_value)
 {
-	return false;
+	this->input_form_value = new_value;
+	this->text_tag = new TextDisplayTag(this->text_tag->get_x_pos(), this->text_tag->get_y_pos(), this->text_tag->get_z_pos(), this->text_tag->get_font_name(), this->input_form_value);
 }
-
-
-
-

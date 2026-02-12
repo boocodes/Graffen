@@ -8,6 +8,8 @@ WindowModule::~WindowModule() {};
 
 WindowModule::WindowModule()
 {
+	this->width = 500;
+	this->height = 600;
 	this->mouse_x = 0;
 	this->mouse_y = 0;
 	this->window = NULL;
@@ -20,9 +22,10 @@ WindowModule::WindowModule()
 	const GLFWvidmode* mode = glfwGetVideoMode(primaryMonitor);
 
 	this->window = glfwCreateWindow(500, 600, window_title.c_str(), NULL, NULL);
-	this->width = 500;
-	this->height = 600;
+	
 	glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+	glfwSetCharCallback(window, character_callback);
+	glfwSetKeyCallback(window, key_callback);
 	glfwSetCursorPosCallback(window, cursor_position_callback);
 	glfwSetMouseButtonCallback(window, mouse_button_callback);
 	glfwMakeContextCurrent(window);
@@ -46,8 +49,8 @@ void WindowModule::render()
 	
 	while (!glfwWindowShouldClose(window))
 	{
-		std::cout << "render" << std::endl;
-		glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+		//std::cout << "render" << std::endl;
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		this->display_tags_container.draw();
 		this->form_tags_container.draw();
@@ -57,44 +60,71 @@ void WindowModule::render()
 	}
 }
 
-void WindowModule::launch_click_check()
+void WindowModule::launch_mouse_click_check()
 {
 	this->display_tags_container.run_click(this->mouse_x, this->mouse_y);
+	this->form_tags_container.run_click(this->mouse_x, this->mouse_y);
 }
 
 void WindowModule::launch_hover_check()
 {
 	this->display_tags_container.run_hover(this->mouse_x, this->mouse_y);
+	this->form_tags_container.run_hover(this->mouse_x, this->mouse_y);
 }
 
 
 void WindowModule::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	void* ptr = glfwGetWindowUserPointer(window);
-	if (ptr)
-	{
-		WindowModule* instance = static_cast<WindowModule*>(ptr);
-		instance->set_mouse_pos(static_cast<int>(xpos), static_cast<int>(ypos));
-		instance->launch_hover_check();
-		
-	}
+	if (!ptr) return;
+
+	WindowModule* instance = static_cast<WindowModule*>(ptr);
+	instance->set_mouse_pos(static_cast<int>(xpos), static_cast<int>(ypos));
+	instance->launch_hover_check();
+}
+
+void WindowModule::character_callback(GLFWwindow* window, unsigned int codepoint)
+{
+	void* ptr = glfwGetWindowUserPointer(window);
+	if (!ptr) return;
+
+	WindowModule* instance = static_cast<WindowModule*>(ptr);
+	
+	instance->form_tags_container.get_keyboard_char(static_cast<char>(codepoint));
+}
+
+void WindowModule::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	void* ptr = glfwGetWindowUserPointer(window);
+	if (!ptr) return;
+
+	WindowModule* instance = static_cast<WindowModule*>(ptr);
+	
+	instance->form_tags_container.get_special_key(action, key);
+}
+
+void WindowModule::framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	void* ptr = glfwGetWindowUserPointer(window);
+	if (!ptr) return;
+
+	
 }
 
 void WindowModule::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
 	std::cout << "click listener\n";
 	void* ptr = glfwGetWindowUserPointer(window);
-	if (ptr)
-	{
-		WindowModule* instance = static_cast<WindowModule*>(ptr);
-		if (button == GLFW_MOUSE_BUTTON_LEFT)
-		{
-			instance->launch_click_check();
-		}
-		else if (button == GLFW_RELEASE)
-		{
+	if (!ptr) return;
 
-		}
+	WindowModule* instance = static_cast<WindowModule*>(ptr);
+	if (button == GLFW_MOUSE_BUTTON_LEFT)
+	{
+		instance->launch_mouse_click_check();
+	}
+	else if (button == GLFW_RELEASE)
+	{
+
 	}
 }
 

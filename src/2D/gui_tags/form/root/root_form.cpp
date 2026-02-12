@@ -17,6 +17,16 @@ std::string RootFormTag::get_input_value()
 	return this->input_form_value;
 }
 
+bool RootFormTag::get_active_flag()
+{
+	return this->is_active;
+}
+
+void RootFormTag::set_active_flag(bool active_flag)
+{
+	this->is_active = active_flag;
+}
+
 std::string RootFormTag::get_tag_type()
 {
 	return this->tag_type;
