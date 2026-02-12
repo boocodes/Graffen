@@ -51,5 +51,8 @@ public:
 
 	void set_background_image(const std::string& new_image);
 	void set_padding(glm::vec4 new_padding);
-	void resize(int new_width = NULL, int new_height = NULL);
+	void set_height(int new_height);
+	void set_width(int new_width);
+	void set_size(int new_width, int new_height);
+	void set_z(int z);
 };

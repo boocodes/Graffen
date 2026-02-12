@@ -24,5 +24,8 @@ public:
 	bool click_check(int mouse_x, int mouse_y);
 
 	void change_image(const std::string& new_image);
-	void resize(int new_width, int new_height);
+	void set_height(int new_height);
+	void set_width(int new_width);
+	void set_size(int new_width, int new_height);
+	void set_z(int z);
 };

@@ -41,7 +41,10 @@ public:
 	void set_border_width(glm::vec4 new_border_width);
 	void set_border_color(glm::vec4 new_border_color);
 	void set_border_opacity(float border_opacity);	
-
+	void set_height(int new_height);
+	void set_width(int new_width);
+	void set_size(int new_width, int new_height);
+	void set_z(int z);
 
 	void set_background_image(const std::string& new_image);
 	
