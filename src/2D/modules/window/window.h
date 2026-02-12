@@ -10,6 +10,9 @@
 class WindowModule
 {
 private:
+	static void character_callback(GLFWwindow* window, unsigned int codepoint);
+	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 	static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 	FormTagsContainer form_tags_container;
@@ -45,6 +48,6 @@ public:
 	~WindowModule();
 	void render();
 
-	void launch_click_check();
+	void launch_mouse_click_check();
 	void launch_hover_check();
 };

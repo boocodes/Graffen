@@ -9,7 +9,6 @@ class InputSimpleFormTag : public RootFormTag
 private:
 	float coords[12];
 	unsigned int VAO, VBO, texture;
-	bool is_active;
 	glm::vec4 border_width;
 	glm::vec4 border_radius;
 	float border_opacity;
@@ -25,6 +24,6 @@ public:
 	void draw();
 	bool hover_check(int mouse_x, int mouse_y);
 	bool click_check(int mouse_x, int mouse_y);
-
+	void set_value(const std::string& new_value);
 	
 };
