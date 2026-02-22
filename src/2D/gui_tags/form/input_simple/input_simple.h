@@ -30,6 +30,7 @@ public:
 	bool hover_check(int mouse_x, int mouse_y);
 	bool click_check(int mouse_x, int mouse_y);
 	void set_value(const std::string& new_value);
+	void center_x(int root_container_width);
 
 	void set_height(int new_height);
 	void set_width(int new_width);

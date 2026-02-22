@@ -138,6 +138,7 @@ void TextDisplayTag::change_font_size(int new_font_size)
 	FontModule buffFont;
 	buffFont.init(this->font_name, this->font_size);
 	this->font = buffFont;
+	std::cout << this->get_wrapper_text_size(this->text_display).x << std::endl;
 }
 
 bool TextDisplayTag::hover_check(int mouse_x, int mouse_y)
@@ -148,7 +149,6 @@ bool TextDisplayTag::hover_check(int mouse_x, int mouse_y)
 		((mouse_y >= this->y_pos) && (mouse_y <= this->y_pos + this->height))
 		)
 	{
-		std::cout << "hovered from text!" << std::endl;
 		this->on_hover();
 		return true;
 	}
@@ -158,6 +158,19 @@ bool TextDisplayTag::hover_check(int mouse_x, int mouse_y)
 bool TextDisplayTag::click_check(int mouse_x, int mouse_y)
 {
 	return false;
+}
+
+void TextDisplayTag::set_x_pos(int x_pos)
+{
+	this->x_pos = x_pos;
+}
+void TextDisplayTag::center_x(int root_container_width)
+{
+	this->x_pos = (root_container_width - this->get_wrapper_text_size(this->text_display).x) / 2;
+}
+void TextDisplayTag::set_color(glm::vec3 color)
+{
+	this->color = color;
 }
 
 void TextDisplayTag::set_max_width(float width)

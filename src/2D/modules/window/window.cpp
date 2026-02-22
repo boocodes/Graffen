@@ -45,19 +45,18 @@ WindowModule::WindowModule()
 
 void WindowModule::render()
 {
+		while (!glfwWindowShouldClose(window))
+		{
+			//std::cout << "render" << std::endl;
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			this->display_tags_container.draw();
+			this->form_tags_container.draw();
+			glfwSwapBuffers(window);
+			glfwPollEvents();
 
+		}
 	
-	while (!glfwWindowShouldClose(window))
-	{
-		//std::cout << "render" << std::endl;
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		this->display_tags_container.draw();
-		this->form_tags_container.draw();
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-		
-	}
 }
 
 void WindowModule::launch_mouse_click_check()

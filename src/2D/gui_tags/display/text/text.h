@@ -44,7 +44,7 @@ private:
 
 	int font_size;
 	glm::vec3 color;
-	std::string text_display;
+	
 	std::string font_name;
 
 	float coords[12];
@@ -53,6 +53,7 @@ public:
 	TextDisplayTag();
 	TextDisplayTag(int x_pos, int y_pos, int z_pos, std::string font_name, std::string text_display);
 	void draw();
+	std::string text_display;
 	std::string get_font_name();
 	std::string get_text_display();
 	void change_text(std::string new_text);
@@ -60,6 +61,11 @@ public:
 	void change_font_size(int new_font_size);
 	bool hover_check(int mouse_x, int mouse_y);
 	bool click_check(int mouse_x, int mouse_y);
+
+	void set_x_pos(int x_pos);
+	void center_x(int root_container_width);
+
+	void set_color(glm::vec3 color);
 
 	void set_max_width(float width);
 	void set_word_wrap(bool wrap);

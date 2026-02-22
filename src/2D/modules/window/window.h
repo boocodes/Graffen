@@ -24,6 +24,7 @@ private:
 	int width,
 		height;
 public:
+	std::function<void()> render_function = 0;
 	// setters
 	void set_form_tags_container(FormTagsContainer container);
 	void set_display_tags_container(DisplayTagsContainer container);

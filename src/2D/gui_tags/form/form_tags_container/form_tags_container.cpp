@@ -68,7 +68,6 @@ void FormTagsContainer::get_keyboard_char(char input_char)
 	{
 		if (elem->get_active_flag())
 		{
-			std::cout << "yes" << std::endl;
 			elem->set_value(elem->get_input_value() + input_char);
 		}
 	}

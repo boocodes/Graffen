@@ -123,10 +123,13 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\java2\source\repos\Graffen2\src;C:\Users\java2\source\repos\Graffen2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\java2\source\repos\Graffen2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp.lib;freetype.lib;glfw3.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -147,6 +150,7 @@
     <ClCompile Include="src\2D\modules\window\window.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Graffen2.cpp" />
+    <ClCompile Include="src\2D\modules\xml\xml_worker.cpp" />
     <ClCompile Include="stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +169,7 @@
     <ClInclude Include="src\2D\modules\shader\shader.h" />
     <ClInclude Include="src\2D\modules\utils\utils.h" />
     <ClInclude Include="src\2D\modules\window\window.h" />
+    <ClInclude Include="src\2D\modules\xml\xml_worker.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

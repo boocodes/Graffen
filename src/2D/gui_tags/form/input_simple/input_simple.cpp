@@ -108,6 +108,12 @@ void InputSimpleFormTag::set_value(const std::string& new_value)
 	this->text_tag->change_text(this->input_form_value);
 }
 
+void InputSimpleFormTag::center_x(int root_container_width)
+{
+	this->x_pos = (root_container_width - this->width) / 2;
+	this->rebuild_vertex_objects();
+}
+
 void InputSimpleFormTag::set_height(int new_height)
 {
 	this->height = new_height;

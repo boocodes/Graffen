@@ -3,5 +3,8 @@
 
 class InputRangeFormTag : public RootFormTag
 {
-
+private:
+	float coords[12];
+	unsigned int VAO, VBO, texture;
+	
 };

@@ -69,7 +69,6 @@ bool DivDisplayTag::click_check(int mouse_x, int mouse_y)
 		((mouse_y >= this->y_pos) && (mouse_y <= this->y_pos + this->height))
 		)
 	{
-		std::cout << "clicked from div!" << std::endl;
 		this->on_click();
 		return true;
 	}
@@ -83,7 +82,6 @@ bool DivDisplayTag::hover_check(int mouse_x, int mouse_y)
 		((mouse_y >= this->y_pos) && (mouse_y <= this->y_pos + this->height))
 		)
 	{
-		std::cout << "hovered from div!" << std::endl;
 		this->on_hover();
 		return true;
 	}
