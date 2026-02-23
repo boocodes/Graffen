@@ -7,6 +7,7 @@ ImgDisplayTag::ImgDisplayTag(int x_pos, int y_pos, int z_pos, const std::string&
 	this->image = image;
 	this->x_pos = x_pos;
 	this->y_pos = y_pos;
+	this->self_id = IdGenerator::next();
 	this->z_pos = z_pos;
 	this->self_id = 1;
 	this->tag_type = "Img";

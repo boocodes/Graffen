@@ -13,6 +13,7 @@ DivDisplayTag::DivDisplayTag(int x_pos, int y_pos, int z_pos, int width, int hei
 {
 	this->EBO = 0;
 	this->VAO = 0;
+	this->self_id = IdGenerator::next();
 	this->VBO = 0;
 	this->border_opacity = 1.0f;
 	this->border_radius = glm::vec4(0, 0, 0, 0);
@@ -26,24 +27,41 @@ DivDisplayTag::DivDisplayTag(int x_pos, int y_pos, int z_pos, int width, int hei
 	this->z_pos = z_pos;
 	this->width = width;
 	this->height = height;
-
+	this->on_click = []() {};
+	this->on_hover = []() {};
 	this->border_width = glm::vec4(0, 0, 0, 0);
 	this->border_color = glm::vec4(0, 0, 0, 0);
 	this->background_color = glm::vec4(0, 0, 0, 1);
+	
 
-	this->rebuild_vertex_objects();
+	glGenVertexArrays(1, &this->VAO);
+	glGenBuffers(1, &this->VBO);
+	glBindVertexArray(this->VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+
+	float new_coords[12] =
+	{
+		this->x_pos,               this->y_pos + this->height, this->z_pos,
+		this->x_pos + this->width, this->y_pos + this->height, this->z_pos,
+		this->x_pos + this->width, this->y_pos,                this->z_pos,
+		this->x_pos,               this->y_pos,                this->z_pos,
+	};
+
+	for (size_t i = 0; i < 12; i++)
+	{
+		this->coords[i] = new_coords[i];
+	}
+
+	glBufferData(GL_ARRAY_BUFFER, sizeof(this->coords), this->coords, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
+	glEnableVertexAttribArray(0);
 	
 }
 
 
 void DivDisplayTag::rebuild_vertex_objects()
 {
-	glGenVertexArrays(1, &this->VAO);
-	glGenBuffers(1, &this->VBO);
-
-	glBindVertexArray(this->VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-	
+	std::cout << "x - " << this->x_pos << ", y - " << this->y_pos << ", z - " << this->z_pos << std::endl;
 	float new_coords[12] =
 	{
 		this->x_pos,               this->y_pos + this->height, this->z_pos,
@@ -57,9 +75,8 @@ void DivDisplayTag::rebuild_vertex_objects()
 		this->coords[i] = new_coords[i];
 	}
 
-	glBufferData(GL_ARRAY_BUFFER, sizeof(this->coords), this->coords, GL_STATIC_DRAW);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(this->coords), this->coords);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
-	glEnableVertexAttribArray(0);
 }
 
 bool DivDisplayTag::click_check(int mouse_x, int mouse_y)
@@ -92,7 +109,7 @@ void DivDisplayTag::draw()
 {
 	
 	if (!this->visibility) return;
-	
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -102,7 +119,6 @@ void DivDisplayTag::draw()
 	div_display_tag_shader.set_vec2("position", glm::vec2(x_pos, y_pos));
 	div_display_tag_shader.set_vec4("color", this->background_color);
 	div_display_tag_shader.set_vec4("border_radius", this->border_radius);
-
 	div_display_tag_shader.set_int("border_size", 1);
 
 	div_display_tag_shader.set_float("border_opacity", this->border_opacity);
@@ -167,9 +183,24 @@ void DivDisplayTag::set_z(int z)
 	this->z_pos = z;
 	this->rebuild_vertex_objects();
 }
+void DivDisplayTag::set_x(int x)
+{
+	this->x_pos = x;
+	this->rebuild_vertex_objects();
+}
 
 void DivDisplayTag::set_background_image(const std::string& new_image)
 {
 	this->background_image = new_image;
+}
+
+void DivDisplayTag::set_visibility(bool flag)
+{
+	this->visibility = flag;
+}
+
+bool DivDisplayTag::get_visibility_flag()
+{
+	return this->visibility;
 }
 

@@ -3,6 +3,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <2D/modules/IdGenerator/IdGenerator.h>
 #include <2D/gui_tags/display/text/text.h>
 #include <GLFW/glfw3.h>
 #include <future>
@@ -25,6 +26,10 @@ private:
 	glm::vec4 background_color;
 	glm::vec4 border_width;
 	glm::vec4 border_color;
+	std::atomic<bool> is_click_proccessing{ false };
+	std::chrono::steady_clock::time_point last_click_time;
+	std::mutex click_mutex;
+
 
 	unsigned int VAO, VBO, texture, EBO;
 	std::string background_image;
@@ -55,4 +60,8 @@ public:
 	void set_width(int new_width);
 	void set_size(int new_width, int new_height);
 	void set_z(int z);
+	void center_x(int root_container_width);
+	
+	void set_font_color(glm::vec3 new_font_color);
+	void set_font_size(int new_font_size);
 };

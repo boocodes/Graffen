@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <2D/modules/utils/utils.h>
 #include <2D/global/global.h>
+#include <2D/modules/IdGenerator/IdGenerator.h>
 
 class ImgDisplayTag : public RootDisplayTag
 {

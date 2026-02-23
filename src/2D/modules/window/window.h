@@ -35,8 +35,10 @@ public:
 	// 
 	// getters
 	GLFWwindow* get_window();
-	FormTagsContainer get_form_tags_container();
 	DisplayTagsContainer get_display_tags_container();
+	FormTagsContainer get_form_tags_container();
+	RootDisplayTag* get_display_tag_by_id(int id);
+	RootFormTag* get_form_tag_by_id(int id);
 	int get_window_width();
 	int get_window_height();
 	int get_mouse_x();

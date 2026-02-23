@@ -63,7 +63,6 @@ void FormTagsContainer::disable_all_form_tags()
 
 void FormTagsContainer::get_keyboard_char(char input_char)
 {
-	std::cout << this->tags[0]->get_active_flag() << std::endl;
 	for (auto elem : this->tags)
 	{
 		if (elem->get_active_flag())

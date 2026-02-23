@@ -8,7 +8,7 @@ WindowModule::~WindowModule() {};
 
 WindowModule::WindowModule()
 {
-	this->width = 500;
+	this->width = 800;
 	this->height = 600;
 	this->mouse_x = 0;
 	this->mouse_y = 0;
@@ -19,11 +19,14 @@ WindowModule::WindowModule()
 		return;
 	}
 	GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
-	const GLFWvidmode* mode = glfwGetVideoMode(primaryMonitor);
-
-	this->window = glfwCreateWindow(500, 600, window_title.c_str(), NULL, NULL);
 	
+	const GLFWvidmode* mode = glfwGetVideoMode(primaryMonitor);
 	glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+	this->window = glfwCreateWindow(this->width, this->height, window_title.c_str(), NULL, NULL);
+	
+
+	glfwSetWindowPos(this->window, (mode->width - this->width) / 2, (mode->height - this->height) / 2);
+
 	glfwSetCharCallback(window, character_callback);
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetCursorPosCallback(window, cursor_position_callback);
@@ -45,10 +48,12 @@ WindowModule::WindowModule()
 
 void WindowModule::render()
 {
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
 		while (!glfwWindowShouldClose(window))
 		{
-			//std::cout << "render" << std::endl;
-			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+			glClearColor(0.06274509803921569f, 0.0f, 0.1607843137254902f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			this->display_tags_container.draw();
 			this->form_tags_container.draw();
@@ -74,12 +79,14 @@ void WindowModule::launch_hover_check()
 
 void WindowModule::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
+	glfwSetCursor(root_window->get_window(), NULL);
 	void* ptr = glfwGetWindowUserPointer(window);
 	if (!ptr) return;
 
 	WindowModule* instance = static_cast<WindowModule*>(ptr);
 	instance->set_mouse_pos(static_cast<int>(xpos), static_cast<int>(ypos));
 	instance->launch_hover_check();
+	
 }
 
 void WindowModule::character_callback(GLFWwindow* window, unsigned int codepoint)
@@ -112,7 +119,6 @@ void WindowModule::framebuffer_size_callback(GLFWwindow* window, int width, int 
 
 void WindowModule::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
-	std::cout << "click listener\n";
 	void* ptr = glfwGetWindowUserPointer(window);
 	if (!ptr) return;
 
@@ -190,6 +196,29 @@ FormTagsContainer WindowModule::get_form_tags_container()
 DisplayTagsContainer WindowModule::get_display_tags_container()
 {
 	return this->display_tags_container;
+}
+
+RootDisplayTag* WindowModule::get_display_tag_by_id(int id)
+{
+	for (auto elem : this->display_tags_container.get_tags())
+	{
+		if (elem->get_self_id() == id) {
+			return elem;
+		}
+	}
+	throw std::exception("Tag with specified id not found");
+}
+
+RootFormTag* WindowModule::get_form_tag_by_id(int id)
+{
+	for (auto elem : this->form_tags_container.get_tags())
+	{
+		if (elem->get_self_id() == id)
+		{
+			return elem;
+		}
+	}
+	throw std::exception("Tag with sepcified id not found");
 }
 
 void WindowModule::add_form_tag(RootFormTag* tag)

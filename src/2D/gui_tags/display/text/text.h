@@ -8,6 +8,7 @@
 #include <map>
 #include <fstream>
 #include <sstream>
+#include <2D/modules/IdGenerator/IdGenerator.h>
 #include <iostream>
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -46,14 +47,14 @@ private:
 	glm::vec3 color;
 	
 	std::string font_name;
-
+	std::string text_display;
 	float coords[12];
 	FontModule font;
 public:
 	TextDisplayTag();
 	TextDisplayTag(int x_pos, int y_pos, int z_pos, std::string font_name, std::string text_display);
 	void draw();
-	std::string text_display;
+	
 	std::string get_font_name();
 	std::string get_text_display();
 	void change_text(std::string new_text);
@@ -62,6 +63,8 @@ public:
 	bool hover_check(int mouse_x, int mouse_y);
 	bool click_check(int mouse_x, int mouse_y);
 
+
+	void set_y_pos(int y_pos);
 	void set_x_pos(int x_pos);
 	void center_x(int root_container_width);
 

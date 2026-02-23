@@ -6,6 +6,7 @@ TextDisplayTag::TextDisplayTag(int x_pos, int y_pos, int z_pos, std::string font
 {
 	this->tag_type = "Text";
 	this->x_pos = x_pos;
+	this->self_id = IdGenerator::next();
 	this->y_pos = y_pos;
 	this->z_pos = z_pos;
 	this->color = color;
@@ -138,7 +139,6 @@ void TextDisplayTag::change_font_size(int new_font_size)
 	FontModule buffFont;
 	buffFont.init(this->font_name, this->font_size);
 	this->font = buffFont;
-	std::cout << this->get_wrapper_text_size(this->text_display).x << std::endl;
 }
 
 bool TextDisplayTag::hover_check(int mouse_x, int mouse_y)
@@ -160,6 +160,10 @@ bool TextDisplayTag::click_check(int mouse_x, int mouse_y)
 	return false;
 }
 
+void TextDisplayTag::set_y_pos(int y_pos)
+{
+	this->y_pos = y_pos;
+}
 void TextDisplayTag::set_x_pos(int x_pos)
 {
 	this->x_pos = x_pos;

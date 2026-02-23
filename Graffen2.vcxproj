@@ -145,6 +145,7 @@
     <ClCompile Include="src\2D\gui_tags\form\input_range\input_range.cpp" />
     <ClCompile Include="src\2D\gui_tags\form\input_simple\input_simple.cpp" />
     <ClCompile Include="src\2D\gui_tags\form\root\root_form.cpp" />
+    <ClCompile Include="src\2D\modules\IdGenerator\IdGenerator.cpp" />
     <ClCompile Include="src\2D\modules\shader\shader.cpp" />
     <ClCompile Include="src\2D\modules\utils\utils.cpp" />
     <ClCompile Include="src\2D\modules\window\window.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="src\2D\gui_tags\form\input_range\input_range.h" />
     <ClInclude Include="src\2D\gui_tags\form\input_simple\input_simple.h" />
     <ClInclude Include="src\2D\gui_tags\form\root\root_form.h" />
+    <ClInclude Include="src\2D\modules\IdGenerator\IdGenerator.h" />
     <ClInclude Include="src\2D\modules\shader\shader.h" />
     <ClInclude Include="src\2D\modules\utils\utils.h" />
     <ClInclude Include="src\2D\modules\window\window.h" />

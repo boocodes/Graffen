@@ -25,7 +25,6 @@ void init_shaders()
 {
 	try
 	{
-		std::cout << "init\n";
 		img_display_tag_shader.generate("src/2D/static/shaders/gui_display_shaders/img/img.vs", "src/2D/static/shaders/gui_display_shaders/img/img.fs");
 		div_display_tag_shader.generate("src/2D/static/shaders/gui_display_shaders/div/div.vs", "src/2D/static/shaders/gui_display_shaders/div/div.fs");
 		text_display_tag_shader.generate("src/2D/static/shaders/gui_display_shaders/text/text.vs", "src/2D/static/shaders/gui_display_shaders/text/text.fs");

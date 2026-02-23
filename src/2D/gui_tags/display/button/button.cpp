@@ -12,36 +12,33 @@ bool ButtonDisplayTag::hover_check(int mouse_x, int mouse_y)
 		)
 	{
 		glfwSetCursor(root_window->get_window(), this->active_cursor);
-		//std::cout << "hovered from button!" << std::endl;
 		this->on_hover();
 		return true;
 	}
-	glfwSetCursor(root_window->get_window(), NULL);
 	return false;
 };
 bool ButtonDisplayTag::click_check(int mouse_x, int mouse_y)
 {
-	int time_delation_debounce = 10;
 
-	static auto last_call = std::chrono::steady_clock::now();
-	auto now = std::chrono::steady_clock::now();
-
-	if (std::chrono::duration_cast<std::chrono::milliseconds>(now - last_call).count() < time_delation_debounce) {
-		return false;
-	}
 	if (
 		((mouse_x >= this->x_pos) && (mouse_x <= this->x_pos + this->width)) &&
 		((mouse_y >= this->y_pos) && (mouse_y <= this->y_pos + this->height))
 		)
 	{
-		std::thread([this]()
-			{
+		auto now = std::chrono::steady_clock::now();
+		if (!is_click_proccessing && std::chrono::duration_cast<std::chrono::milliseconds>(now - last_click_time).count() > 200)
+		{
+			is_click_proccessing = true;
+			last_click_time = now;
+			std::thread([this]() {
 				if (this->on_click)
 				{
 					this->on_click();
 				}
-				
-			}).detach();
+				std::this_thread::sleep_for(std::chrono::microseconds(300));
+				is_click_proccessing = false;
+				}).detach();
+		}
 	}
 	return false;
 };
@@ -50,6 +47,7 @@ bool ButtonDisplayTag::click_check(int mouse_x, int mouse_y)
 ButtonDisplayTag::ButtonDisplayTag(int x_pos, int y_pos, int z_pos, const std::string& text)
 {
 	this->tag_type = "Button";
+	this->self_id = IdGenerator::next();
 	this->x_pos = x_pos;
 	this->y_pos = y_pos;
 	this->z_pos = z_pos;
@@ -57,12 +55,11 @@ ButtonDisplayTag::ButtonDisplayTag(int x_pos, int y_pos, int z_pos, const std::s
 	this->border_color = glm::vec4(0.9, 0.9, 0.9, 1);
 	this->border_width = glm::vec4(2, 2, 2, 2);
 	this->background_color = glm::vec4(1, 1, 1, 1);
-	this->button_text = new TextDisplayTag(this->x_pos, this->y_pos, this->z_pos, "assets/fonts/JetBrainsMono-Regular.ttf", this->display_text);
+	this->button_text = new TextDisplayTag(this->x_pos, this->y_pos, this->z_pos, "assets/fonts/Roboto-Bold.ttf", this->display_text);
 	this->visibility = true;
 	this->padding = glm::vec4(0, 0, 0, 0);
 	this->on_click = []()
 		{
-			std::cout << "clicked from inner function onclick\n";
 			return;
 		};
 	this->on_hover = []()
@@ -70,7 +67,7 @@ ButtonDisplayTag::ButtonDisplayTag(int x_pos, int y_pos, int z_pos, const std::s
 			return;
 		};
 
-	active_cursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
+	this->active_cursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
 
 	int button_text_height = this->button_text->get_wrapper_text_size(this->display_text).y;
 	int button_text_width = this->button_text->get_wrapper_text_size(this->display_text).x;
@@ -138,7 +135,8 @@ void ButtonDisplayTag::rebuild_vertex_objects()
 	int button_text_height = this->button_text->get_wrapper_text_size(this->display_text).y;
 	int button_text_width = this->button_text->get_wrapper_text_size(this->display_text).x;
 
-	this->button_text = new TextDisplayTag(this->x_pos + ((this->width - button_text_width) / 2), this->y_pos + ((this->height - button_text_height) / 2), this->button_text->get_z_pos(), this->button_text->get_font_name(), this->button_text->get_text_display());
+	this->button_text->set_x_pos(this->x_pos + (this->width - button_text_width) / 2);
+	this->button_text->set_y_pos(this->y_pos + (this->height - button_text_height) / 2);
 }
 
 
@@ -202,5 +200,27 @@ void ButtonDisplayTag::set_z(int z)
 	this->z_pos = z;
 	this->rebuild_vertex_objects();
 }
+
+void ButtonDisplayTag::center_x(int root_container_width)
+{
+	this->x_pos = (root_container_width - this->width) / 2;
+	this->rebuild_vertex_objects();
+}
+
+void ButtonDisplayTag::set_font_color(glm::vec3 new_font_color)
+{
+	this->button_text->set_color(new_font_color);
+}
+
+void ButtonDisplayTag::set_font_size(int new_font_size)
+{
+	this->button_text->change_font_size(new_font_size);
+	int new_width = this->button_text->get_wrapper_text_size(this->button_text->get_text_display()).x;
+	int new_height = this->button_text->get_wrapper_text_size(this->button_text->get_text_display()).y;
+	this->width = new_width;
+	this->height = new_height;
+	this->rebuild_vertex_objects();
+}
+
 
 

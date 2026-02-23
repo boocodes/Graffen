@@ -15,6 +15,7 @@ public:
 	void draw();
 	void log_inner_data();
 	void get_keyboard_char(char input_char);
+	std::vector<RootFormTag*> get_tags() { return this->tags; };
 	void get_special_key(int action, int key);
 	void update_value(char new_char, RootFormTag* active_form_elem);
 	void run_click(int mouse_x, int mouse_y);

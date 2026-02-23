@@ -7,6 +7,7 @@
 #include <glad/glad.h>
 #include <iostream>
 #include <2D/global/global.h>
+#include <2D/modules/IdGenerator/IdGenerator.h>
 
 
 
@@ -45,8 +46,10 @@ public:
 	void set_width(int new_width);
 	void set_size(int new_width, int new_height);
 	void set_z(int z);
+	void set_x(int x);
 
 	void set_background_image(const std::string& new_image);
-	
+	void set_visibility(bool flag);
+	bool get_visibility_flag();
 
 };
